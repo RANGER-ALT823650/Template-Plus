@@ -1,0 +1,8 @@
+{
+  "version": 1,
+  "shape": "drop",
+  "color": "brown",
+  "size": 1024,
+  "padding": 16,
+  "background": "transparent"
+}

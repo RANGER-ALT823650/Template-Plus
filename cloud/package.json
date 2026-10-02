@@ -1,0 +1,17 @@
+{
+  "name": "template-plus-cloud",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs"
+  },
+  "dependencies": {
+    "@xmldom/xmldom": "^0.9.12",
+    "pdfkit": "^0.20.2",
+    "svg-to-pdfkit": "^0.1.8",
+    "buffer": "^6.0.3"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.0"
+  }
+}

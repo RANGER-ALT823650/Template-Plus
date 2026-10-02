@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="360" viewBox="0 0 320 360" role="img" aria-labelledby="title desc">
+  <title id="title">绿色大眼公仔</title>
+  <desc id="desc">参考第一张图片补全轮廓和配饰，参考第二张图片绘制鲜艳配色。透明背景，可编辑矢量路径，无内嵌位图。</desc>
+  <defs>
+    <radialGradient id="green-body-fill" cx="34%" cy="25%" r="88%">
+      <stop offset="0" stop-color="#CDF778"/>
+      <stop offset=".48" stop-color="#A9EC43"/>
+      <stop offset="1" stop-color="#86D532"/>
+    </radialGradient>
+    <linearGradient id="green-black" x1="0" y1="0" x2=".7" y2="1" gradientUnits="objectBoundingBox">
+      <stop stop-color="#353638"/>
+      <stop offset=".55" stop-color="#202224"/>
+      <stop offset="1" stop-color="#111315"/>
+    </linearGradient>
+  </defs>
+  
+  <g id="green-character">
+    <path id="green-body" d="M52 162C53 139 65 118 78 104C76 77 92 55 115 55C138 54 156 73 157 98C168 96 180 97 190 100C193 76 207 61 228 65C250 68 261 91 258 115C277 135 287 163 286 196C286 241 259 277 219 290C186 303 133 303 99 288C57 271 34 239 36 202C36 187 43 172 52 162Z" fill="url(#green-body-fill)"/>
+    <g id="green-eye-whites" fill="#F7FFE9">
+      <ellipse cx="116" cy="95" rx="24" ry="26"/>
+      <ellipse cx="226" cy="105" rx="24" ry="26"/>
+    </g>
+    <g id="green-pupils" fill="#16191A">
+      <ellipse cx="118" cy="97" rx="16" ry="18"/>
+      <ellipse cx="228" cy="107" rx="16" ry="18"/>
+    </g>
+    <g id="green-bow-tie" transform="translate(166 287) scale(1.04)" fill="url(#green-black)">
+      <path d="M-5-2C-17-11-37-21-44-18C-48-16-48 12-45 18C-42 24-19 12-5 5Z"/>
+      <path d="M5-2C17-11 37-21 44-18C48-16 48 12 45 18C42 24 19 12 5 5Z"/>
+      <path d="M-7-5Q0-9 7-5L8 6Q0 10-8 6Z" fill="#292B2D"/>
+    </g>
+  </g>
+</svg>

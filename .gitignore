@@ -1,0 +1,15 @@
+node_modules/
+tmp/
+.playwright-cli/
+.DS_Store
+
+# Generated exports, QA artifacts and deployment bundles
+/output/
+/cloud/dist/
+/template-plus-site.tar.gz
+
+# Local credentials
+.env
+.env.*
+!.env.example
+!.env.*.example

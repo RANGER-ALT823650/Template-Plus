@@ -1,0 +1,91 @@
+{
+  "version": 1,
+  "name": "iPhone Air / Template Plus - Style 01",
+  "objects": [
+    {
+      "id": "style01-1",
+      "name": "drop / pink",
+      "type": "avatar",
+      "config": {
+        "version": 1,
+        "shape": "drop",
+        "color": "pink",
+        "size": 200,
+        "padding": 0,
+        "background": "transparent"
+      },
+      "x": 25,
+      "y": 6.2,
+      "width": 8.6,
+      "rotation": -19
+    },
+    {
+      "id": "style01-2",
+      "name": "capsule / blue",
+      "type": "avatar",
+      "config": {
+        "version": 1,
+        "shape": "capsule",
+        "color": "blue",
+        "size": 200,
+        "padding": 0,
+        "background": "transparent"
+      },
+      "x": 27,
+      "y": 17.1,
+      "width": 8.0,
+      "rotation": 16
+    },
+    {
+      "id": "style01-3",
+      "name": "hexagon / purple",
+      "type": "avatar",
+      "config": {
+        "version": 1,
+        "shape": "hexagon",
+        "color": "purple",
+        "size": 200,
+        "padding": 0,
+        "background": "transparent"
+      },
+      "x": 37.3,
+      "y": 11.0,
+      "width": 9.3,
+      "rotation": -10
+    },
+    {
+      "id": "style01-4",
+      "name": "oval / brown",
+      "type": "avatar",
+      "config": {
+        "version": 1,
+        "shape": "oval",
+        "color": "brown",
+        "size": 200,
+        "padding": 0,
+        "background": "transparent"
+      },
+      "x": 48.5,
+      "y": 5.1,
+      "width": 6.5863,
+      "rotation": 24
+    },
+    {
+      "id": "style01-5",
+      "name": "square / teal",
+      "type": "avatar",
+      "config": {
+        "version": 1,
+        "shape": "square",
+        "color": "teal",
+        "size": 200,
+        "padding": 0,
+        "background": "transparent"
+      },
+      "x": 53.2,
+      "y": 19.0,
+      "width": 4.940741650196017,
+      "rotation": -16
+    }
+  ]
+}

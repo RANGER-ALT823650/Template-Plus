@@ -1,0 +1,8 @@
+[
+  {"op":"add","id":"buddy","shape":"cloud","color":"pink","x":42,"y":17,"width":12},
+  {"op":"add","id":"coffee","asset":"muse-png-04-coffee","x":51,"y":28,"width":10},
+  {"op":"update","id":"buddy","rotation":-15,"color":"blue"},
+  {"op":"duplicate","id":"buddy","newId":"buddy-copy","x":32,"y":28,"width":8},
+  {"op":"back","id":"coffee"},
+  {"op":"rename","name":"Agent 的贴纸"}
+]

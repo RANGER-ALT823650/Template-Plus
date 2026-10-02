@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#F7F7F2">
+  <title>Template Plus · 完整形象编辑器</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='12' fill='%23936439'/%3E%3Cpath d='M23 15l3 6M31 14l2 5' stroke='white' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="/style.css"><script type="module" src="/app.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="小小形象首页"><span class="brand-mark"><i></i><i></i></span><span>小小形象<small>LITTLE SHAPE STUDIO</small></span></a>
+    <div class="top-actions"><a class="text-button" href="/">← 贴纸工作站</a><span class="local-badge"><span></span>本地创作，随心组合</span><button class="text-button" id="show-agent"><span class="code-icon">&gt;_</span> Agent / CLI</button></div>
+  </header>
+  <main>
+    <div class="intro"><div><p class="eyebrow">A LITTLE SHAPE, A LITTLE PERSONALITY.</p><h1>给图案一点性格<span>。</span></h1><p class="subtitle">选一个形状，添一种颜色。让它成为你的专属小伙伴。</p></div><button id="show-gallery" class="collection-link">8 个图案 × 11 种颜色 <span>查看 88 种组合 ↗</span></button></div>
+    <div class="workspace">
+      <section class="preview-panel" aria-label="形象预览">
+        <div class="panel-top"><span><i class="live-dot"></i>实时预览</span><div class="preview-toggles" aria-label="预览底色"><button id="preview-light" class="active" aria-label="浅色预览" aria-pressed="true">◐</button><button id="preview-grid" aria-label="棋盘格预览" aria-pressed="false">▦</button></div></div>
+        <div class="stage" id="stage"><div id="avatar" class="avatar"></div></div>
+        <div class="preview-bottom"><div><strong id="character-name">水滴 / 棕色</strong><span id="character-meta">#936439 · 白色眼睛</span></div><button id="random" class="shuffle-button" title="随机组合">⤨ <span>随机遇见</span></button></div>
+        <div class="mini-friends" id="friends" aria-label="其他组合推荐"></div>
+      </section>
+      <section class="controls" aria-label="形象编辑器">
+        <div class="control-section"><div class="section-title"><h2><span>01</span> 选择图案</h2><span class="value" id="shape-name">水滴</span></div><div id="shapes" class="shape-grid" role="group" aria-label="图案"></div></div>
+        <div class="control-section"><div class="section-title"><h2><span>02</span> 赋予颜色</h2><span class="value color-value" id="color-value">棕色 <code>#936439</code></span></div><div id="colors" class="color-grid" role="group" aria-label="颜色"></div></div>
+        <div class="control-section export-section"><div class="section-title"><h2><span>03</span> 带走小伙伴</h2><span class="value">白色眼睛 · 位置固定</span></div>
+          <div class="export-settings"><label>导出尺寸<select id="size"><option value="256">256 × 256</option><option value="512">512 × 512</option><option value="1024" selected>1024 × 1024</option><option value="2048">2048 × 2048</option><option value="4096">4096 × 4096</option></select></label><label>画布背景<select id="background"><option value="transparent">透明背景</option><option value="white">白色背景</option></select></label></div>
+          <label class="padding-label" for="padding">画布留白 <output id="padding-value">16%</output></label><input type="range" id="padding" min="0" max="40" step="1" value="16">
+          <div class="download-row"><button id="export-svg" class="primary-button">↓ 导出 SVG <span>矢量</span></button><button id="export-png" class="secondary-button">↓ 导出 PNG</button><button id="export-webp" class="icon-button" title="导出 WebP" aria-label="导出 WebP">WebP</button></div>
+          <button id="send-to-layout" class="secondary-button" style="width:100%;margin-top:12px">＋ 将当前形象添加到贴纸排版</button><p class="export-note">纯色轮廓与白色眼睛，可无限缩放的 SVG。</p>
+        </div>
+        <div class="recipe-actions"><button id="save-config">↓ 保存配置</button><button id="load-config">↑ 导入配置</button><button id="reset">↺ 重置</button><input type="file" id="config-file" accept="application/json,.json" hidden></div>
+      </section>
+    </div>
+    <footer><span>简单的形状，也有自己的表情。</span><span>8 SHAPES <b>·</b> 11 COLORS <b>·</b> ONE LITTLE YOU</span></footer>
+  </main>
+  <dialog id="agent-dialog"><div class="dialog-heading"><div><p class="eyebrow">FOR YOUR AGENT</p><h2>同一形象，两种操作方式。</h2></div><button class="close-dialog" aria-label="关闭">×</button></div><p>在项目目录运行以下命令，即可导出当前形象。</p><pre id="cli-command"></pre><button id="copy-command" class="primary-button">复制命令</button><div class="agent-more"><p>查看全部选项 <code>node cli.mjs list --json</code></p><p>批量导出 88 种组合 <code>node cli.mjs batch --out output/all --formats svg,png</code></p><p>读取保存的配置 <code>node cli.mjs render --config avatar.json --out output/avatar.png</code></p></div></dialog>
+  <dialog id="gallery-dialog"><div class="dialog-heading"><div><p class="eyebrow">THE WHOLE LITTLE FAMILY</p><h2>88 种小小可能。</h2></div><button class="close-dialog" aria-label="关闭">×</button></div><p>点选任意形象，回到编辑器继续创作。</p><div class="gallery-grid" id="gallery"></div></dialog>
+  <div id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

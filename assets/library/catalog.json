@@ -1,0 +1,242 @@
+[
+  {
+    "id": "muse-png-01-profile",
+    "group": "muse-png",
+    "label": "Muse · PNG",
+    "type": "png",
+    "name": "Muse · 打招呼",
+    "file": "/assets/library/muse-png/01-profile.png"
+  },
+  {
+    "id": "muse-png-02-treadmill",
+    "group": "muse-png",
+    "label": "Muse · PNG",
+    "type": "png",
+    "name": "Muse · 跑步机",
+    "file": "/assets/library/muse-png/02-treadmill.png"
+  },
+  {
+    "id": "muse-png-03-headphones-laptop",
+    "group": "muse-png",
+    "label": "Muse · PNG",
+    "type": "png",
+    "name": "Muse · 耳机办公",
+    "file": "/assets/library/muse-png/03-headphones-laptop.png"
+  },
+  {
+    "id": "muse-png-04-coffee",
+    "group": "muse-png",
+    "label": "Muse · PNG",
+    "type": "png",
+    "name": "Muse · 喝咖啡",
+    "file": "/assets/library/muse-png/04-coffee.png"
+  },
+  {
+    "id": "muse-png-05-reading",
+    "group": "muse-png",
+    "label": "Muse · PNG",
+    "type": "png",
+    "name": "Muse · 阅读",
+    "file": "/assets/library/muse-png/05-reading.png"
+  },
+  {
+    "id": "muse-png-06-gardening",
+    "group": "muse-png",
+    "label": "Muse · PNG",
+    "type": "png",
+    "name": "Muse · 浇花",
+    "file": "/assets/library/muse-png/06-gardening.png"
+  },
+  {
+    "id": "muse-png-07-painting",
+    "group": "muse-png",
+    "label": "Muse · PNG",
+    "type": "png",
+    "name": "Muse · 画画",
+    "file": "/assets/library/muse-png/07-painting.png"
+  },
+  {
+    "id": "muse-png-08-sleeping",
+    "group": "muse-png",
+    "label": "Muse · PNG",
+    "type": "png",
+    "name": "Muse · 睡觉",
+    "file": "/assets/library/muse-png/08-sleeping.png"
+  },
+  {
+    "id": "dots-svg-01-pink-headphones",
+    "group": "dots-svg",
+    "label": "Dots · SVG",
+    "type": "svg",
+    "name": "粉色耳机公仔",
+    "file": "/assets/library/dots-svg/01-pink-headphones.svg"
+  },
+  {
+    "id": "dots-svg-02-blue-beret",
+    "group": "dots-svg",
+    "label": "Dots · SVG",
+    "type": "svg",
+    "name": "蓝色贝雷帽公仔",
+    "file": "/assets/library/dots-svg/02-blue-beret.svg"
+  },
+  {
+    "id": "dots-svg-03-yellow-glasses",
+    "group": "dots-svg",
+    "label": "Dots · SVG",
+    "type": "svg",
+    "name": "黄色圆框眼镜公仔",
+    "file": "/assets/library/dots-svg/03-yellow-glasses.svg"
+  },
+  {
+    "id": "dots-svg-04-green-wide-eyes",
+    "group": "dots-svg",
+    "label": "Dots · SVG",
+    "type": "svg",
+    "name": "绿色大眼公仔",
+    "file": "/assets/library/dots-svg/04-green-wide-eyes.svg"
+  },
+  {
+    "id": "dots-svg-05-magenta-heart",
+    "group": "dots-svg",
+    "label": "Dots · SVG",
+    "type": "svg",
+    "name": "玫红爱心墨镜公仔",
+    "file": "/assets/library/dots-svg/05-magenta-heart.svg"
+  },
+  {
+    "id": "muse-svg-01-profile",
+    "group": "muse-svg",
+    "label": "Muse · SVG",
+    "type": "svg",
+    "name": "主形象",
+    "file": "/assets/library/muse-svg/01-profile.svg"
+  },
+  {
+    "id": "muse-svg-02-treadmill",
+    "group": "muse-svg",
+    "label": "Muse · SVG",
+    "type": "svg",
+    "name": "跑步机",
+    "file": "/assets/library/muse-svg/02-treadmill.svg"
+  },
+  {
+    "id": "muse-svg-03-laptop",
+    "group": "muse-svg",
+    "label": "Muse · SVG",
+    "type": "svg",
+    "name": "戴耳机敲电脑",
+    "file": "/assets/library/muse-svg/03-laptop.svg"
+  },
+  {
+    "id": "muse-svg-04-coffee",
+    "group": "muse-svg",
+    "label": "Muse · SVG",
+    "type": "svg",
+    "name": "喝咖啡",
+    "file": "/assets/library/muse-svg/04-coffee.svg"
+  },
+  {
+    "id": "muse-svg-05-reading",
+    "group": "muse-svg",
+    "label": "Muse · SVG",
+    "type": "svg",
+    "name": "读书",
+    "file": "/assets/library/muse-svg/05-reading.svg"
+  },
+  {
+    "id": "muse-svg-06-watering",
+    "group": "muse-svg",
+    "label": "Muse · SVG",
+    "type": "svg",
+    "name": "浇花",
+    "file": "/assets/library/muse-svg/06-watering.svg"
+  },
+  {
+    "id": "muse-svg-07-balloon",
+    "group": "muse-svg",
+    "label": "Muse · SVG",
+    "type": "svg",
+    "name": "气球",
+    "file": "/assets/library/muse-svg/07-balloon.svg"
+  },
+  {
+    "id": "muse-svg-08-gaming",
+    "group": "muse-svg",
+    "label": "Muse · SVG",
+    "type": "svg",
+    "name": "打游戏",
+    "file": "/assets/library/muse-svg/08-gaming.svg"
+  },
+  {
+    "id": "muse-svg-09-sleeping",
+    "group": "muse-svg",
+    "label": "Muse · SVG",
+    "type": "svg",
+    "name": "犯困",
+    "file": "/assets/library/muse-svg/09-sleeping.svg"
+  },
+  {
+    "id": "ai-logos-svg-01-gemini",
+    "group": "ai-logos-svg",
+    "label": "AI Logo · SVG",
+    "type": "svg",
+    "name": "Gemini",
+    "file": "/assets/library/ai-logos-svg/01-gemini.svg"
+  },
+  {
+    "id": "ai-logos-svg-02-glm",
+    "group": "ai-logos-svg",
+    "label": "AI Logo · SVG",
+    "type": "svg",
+    "name": "GLM",
+    "file": "/assets/library/ai-logos-svg/02-glm.svg"
+  },
+  {
+    "id": "ai-logos-svg-03-kimi",
+    "group": "ai-logos-svg",
+    "label": "AI Logo · SVG",
+    "type": "svg",
+    "name": "Kimi",
+    "file": "/assets/library/ai-logos-svg/03-kimi.svg"
+  },
+  {
+    "id": "ai-logos-svg-04-qwen",
+    "group": "ai-logos-svg",
+    "label": "AI Logo · SVG",
+    "type": "svg",
+    "name": "Qwen",
+    "file": "/assets/library/ai-logos-svg/04-qwen.svg"
+  },
+  {
+    "id": "ai-logos-svg-05-grok",
+    "group": "ai-logos-svg",
+    "label": "AI Logo · SVG",
+    "type": "svg",
+    "name": "Grok",
+    "file": "/assets/library/ai-logos-svg/05-grok.svg"
+  },
+  {
+    "id": "ai-logos-svg-06-deepseek",
+    "group": "ai-logos-svg",
+    "label": "AI Logo · SVG",
+    "type": "svg",
+    "name": "DeepSeek",
+    "file": "/assets/library/ai-logos-svg/06-deepseek.svg"
+  },
+  {
+    "id": "ai-logos-svg-07-claude",
+    "group": "ai-logos-svg",
+    "label": "AI Logo · SVG",
+    "type": "svg",
+    "name": "Claude",
+    "file": "/assets/library/ai-logos-svg/07-claude.svg"
+  },
+  {
+    "id": "ai-logos-svg-08-openai",
+    "group": "ai-logos-svg",
+    "label": "AI Logo · SVG",
+    "type": "svg",
+    "name": "OpenAI",
+    "file": "/assets/library/ai-logos-svg/08-openai.svg"
+  }
+]

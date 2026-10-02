@@ -1,0 +1,732 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Template Plus Sticker Operations",
+  "description": "Sequential operations for create --ops and apply --ops. Local file paths resolve relative to the operations file, or cwd for stdin. The entire batch validates before any layout is written.",
+  "type": "array",
+  "maxItems": 1000,
+  "items": {
+    "oneOf": [
+      {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "op"
+        ],
+        "properties": {
+          "op": {
+            "const": "add"
+          },
+          "id": {
+            "type": "string",
+            "pattern": "^[\\w-]{1,80}$"
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 100
+          },
+          "x": {
+            "type": "number",
+            "minimum": -100,
+            "maximum": 165
+          },
+          "y": {
+            "type": "number",
+            "minimum": -100,
+            "maximum": 124
+          },
+          "width": {
+            "type": "number",
+            "minimum": 0.5,
+            "maximum": 150
+          },
+          "rotation": {
+            "type": "number",
+            "minimum": -360,
+            "maximum": 360
+          },
+          "asset": {
+            "type": "string"
+          },
+          "file": {
+            "type": "string",
+            "minLength": 1
+          },
+          "config": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "version": {
+                "const": 1,
+                "default": 1
+              },
+              "shape": {
+                "enum": [
+                  "circle",
+                  "oval",
+                  "square",
+                  "capsule",
+                  "triangle",
+                  "hexagon",
+                  "cloud",
+                  "drop"
+                ],
+                "default": "drop"
+              },
+              "color": {
+                "enum": [
+                  "black",
+                  "brown",
+                  "red",
+                  "orange",
+                  "yellow",
+                  "green",
+                  "teal",
+                  "blue",
+                  "purple",
+                  "pink",
+                  "gray"
+                ],
+                "default": "brown"
+              },
+              "size": {
+                "type": "integer",
+                "minimum": 64,
+                "maximum": 4096,
+                "default": 1024
+              },
+              "padding": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 40,
+                "default": 16
+              },
+              "background": {
+                "enum": [
+                  "transparent",
+                  "white"
+                ],
+                "default": "transparent"
+              }
+            }
+          },
+          "shape": {
+            "enum": [
+              "circle",
+              "oval",
+              "square",
+              "capsule",
+              "triangle",
+              "hexagon",
+              "cloud",
+              "drop"
+            ],
+            "default": "drop"
+          },
+          "color": {
+            "enum": [
+              "black",
+              "brown",
+              "red",
+              "orange",
+              "yellow",
+              "green",
+              "teal",
+              "blue",
+              "purple",
+              "pink",
+              "gray"
+            ],
+            "default": "brown"
+          },
+          "size": {
+            "type": "integer",
+            "minimum": 64,
+            "maximum": 4096,
+            "default": 1024
+          },
+          "padding": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 40,
+            "default": 16
+          },
+          "background": {
+            "enum": [
+              "transparent",
+              "white"
+            ],
+            "default": "transparent"
+          }
+        },
+        "allOf": [
+          {
+            "not": {
+              "required": [
+                "asset",
+                "file"
+              ]
+            }
+          },
+          {
+            "not": {
+              "required": [
+                "asset",
+                "config"
+              ]
+            }
+          },
+          {
+            "not": {
+              "required": [
+                "file",
+                "config"
+              ]
+            }
+          },
+          {
+            "not": {
+              "required": [
+                "asset",
+                "shape"
+              ]
+            }
+          },
+          {
+            "not": {
+              "required": [
+                "asset",
+                "color"
+              ]
+            }
+          },
+          {
+            "not": {
+              "required": [
+                "asset",
+                "size"
+              ]
+            }
+          },
+          {
+            "not": {
+              "required": [
+                "asset",
+                "padding"
+              ]
+            }
+          },
+          {
+            "not": {
+              "required": [
+                "asset",
+                "background"
+              ]
+            }
+          },
+          {
+            "not": {
+              "required": [
+                "file",
+                "shape"
+              ]
+            }
+          },
+          {
+            "not": {
+              "required": [
+                "file",
+                "color"
+              ]
+            }
+          },
+          {
+            "not": {
+              "required": [
+                "file",
+                "size"
+              ]
+            }
+          },
+          {
+            "not": {
+              "required": [
+                "file",
+                "padding"
+              ]
+            }
+          },
+          {
+            "not": {
+              "required": [
+                "file",
+                "background"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "op",
+          "id"
+        ],
+        "properties": {
+          "op": {
+            "const": "update"
+          },
+          "id": {
+            "type": "string",
+            "pattern": "^[\\w-]{1,80}$"
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 100
+          },
+          "x": {
+            "type": "number",
+            "minimum": -100,
+            "maximum": 165
+          },
+          "y": {
+            "type": "number",
+            "minimum": -100,
+            "maximum": 124
+          },
+          "width": {
+            "type": "number",
+            "minimum": 0.5,
+            "maximum": 150
+          },
+          "rotation": {
+            "type": "number",
+            "minimum": -360,
+            "maximum": 360
+          },
+          "asset": {
+            "type": "string"
+          },
+          "file": {
+            "type": "string",
+            "minLength": 1
+          },
+          "config": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "version": {
+                "const": 1,
+                "default": 1
+              },
+              "shape": {
+                "enum": [
+                  "circle",
+                  "oval",
+                  "square",
+                  "capsule",
+                  "triangle",
+                  "hexagon",
+                  "cloud",
+                  "drop"
+                ],
+                "default": "drop"
+              },
+              "color": {
+                "enum": [
+                  "black",
+                  "brown",
+                  "red",
+                  "orange",
+                  "yellow",
+                  "green",
+                  "teal",
+                  "blue",
+                  "purple",
+                  "pink",
+                  "gray"
+                ],
+                "default": "brown"
+              },
+              "size": {
+                "type": "integer",
+                "minimum": 64,
+                "maximum": 4096,
+                "default": 1024
+              },
+              "padding": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 40,
+                "default": 16
+              },
+              "background": {
+                "enum": [
+                  "transparent",
+                  "white"
+                ],
+                "default": "transparent"
+              }
+            }
+          },
+          "shape": {
+            "enum": [
+              "circle",
+              "oval",
+              "square",
+              "capsule",
+              "triangle",
+              "hexagon",
+              "cloud",
+              "drop"
+            ],
+            "default": "drop"
+          },
+          "color": {
+            "enum": [
+              "black",
+              "brown",
+              "red",
+              "orange",
+              "yellow",
+              "green",
+              "teal",
+              "blue",
+              "purple",
+              "pink",
+              "gray"
+            ],
+            "default": "brown"
+          },
+          "size": {
+            "type": "integer",
+            "minimum": 64,
+            "maximum": 4096,
+            "default": 1024
+          },
+          "padding": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 40,
+            "default": 16
+          },
+          "background": {
+            "enum": [
+              "transparent",
+              "white"
+            ],
+            "default": "transparent"
+          }
+        },
+        "allOf": [
+          {
+            "not": {
+              "required": [
+                "asset",
+                "file"
+              ]
+            }
+          },
+          {
+            "not": {
+              "required": [
+                "asset",
+                "config"
+              ]
+            }
+          },
+          {
+            "not": {
+              "required": [
+                "file",
+                "config"
+              ]
+            }
+          },
+          {
+            "not": {
+              "required": [
+                "asset",
+                "shape"
+              ]
+            }
+          },
+          {
+            "not": {
+              "required": [
+                "asset",
+                "color"
+              ]
+            }
+          },
+          {
+            "not": {
+              "required": [
+                "asset",
+                "size"
+              ]
+            }
+          },
+          {
+            "not": {
+              "required": [
+                "asset",
+                "padding"
+              ]
+            }
+          },
+          {
+            "not": {
+              "required": [
+                "asset",
+                "background"
+              ]
+            }
+          },
+          {
+            "not": {
+              "required": [
+                "file",
+                "shape"
+              ]
+            }
+          },
+          {
+            "not": {
+              "required": [
+                "file",
+                "color"
+              ]
+            }
+          },
+          {
+            "not": {
+              "required": [
+                "file",
+                "size"
+              ]
+            }
+          },
+          {
+            "not": {
+              "required": [
+                "file",
+                "padding"
+              ]
+            }
+          },
+          {
+            "not": {
+              "required": [
+                "file",
+                "background"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "op",
+          "id"
+        ],
+        "properties": {
+          "op": {
+            "const": "remove"
+          },
+          "id": {
+            "type": "string",
+            "pattern": "^[\\w-]{1,80}$"
+          }
+        }
+      },
+      {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "op",
+          "id"
+        ],
+        "properties": {
+          "op": {
+            "const": "duplicate"
+          },
+          "id": {
+            "type": "string",
+            "pattern": "^[\\w-]{1,80}$"
+          },
+          "newId": {
+            "type": "string",
+            "pattern": "^[\\w-]{1,80}$"
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 100
+          },
+          "x": {
+            "type": "number",
+            "minimum": -100,
+            "maximum": 165
+          },
+          "y": {
+            "type": "number",
+            "minimum": -100,
+            "maximum": 124
+          },
+          "width": {
+            "type": "number",
+            "minimum": 0.5,
+            "maximum": 150
+          },
+          "rotation": {
+            "type": "number",
+            "minimum": -360,
+            "maximum": 360
+          }
+        }
+      },
+      {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "op",
+          "id"
+        ],
+        "properties": {
+          "op": {
+            "const": "front"
+          },
+          "id": {
+            "type": "string",
+            "pattern": "^[\\w-]{1,80}$"
+          }
+        }
+      },
+      {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "op",
+          "id"
+        ],
+        "properties": {
+          "op": {
+            "const": "back"
+          },
+          "id": {
+            "type": "string",
+            "pattern": "^[\\w-]{1,80}$"
+          }
+        }
+      },
+      {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "op",
+          "ids"
+        ],
+        "properties": {
+          "op": {
+            "const": "reorder"
+          },
+          "ids": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "pattern": "^[\\w-]{1,80}$"
+            }
+          }
+        }
+      },
+      {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "op",
+          "id"
+        ],
+        "properties": {
+          "op": {
+            "const": "center"
+          },
+          "id": {
+            "type": "string",
+            "pattern": "^[\\w-]{1,80}$"
+          }
+        }
+      },
+      {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "op",
+          "id"
+        ],
+        "properties": {
+          "op": {
+            "const": "cover"
+          },
+          "id": {
+            "type": "string",
+            "pattern": "^[\\w-]{1,80}$"
+          }
+        }
+      },
+      {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "op",
+          "model"
+        ],
+        "properties": {
+          "op": {
+            "const": "model"
+          },
+          "model": {
+            "enum": [
+              "iphone-air",
+              "iphone-17-pro",
+              "iphone-17-pro-max",
+              "iphone-18-pro",
+              "iphone-18-pro-max"
+            ]
+          }
+        }
+      },
+      {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "op",
+          "name"
+        ],
+        "properties": {
+          "op": {
+            "const": "rename"
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 100
+          }
+        }
+      },
+      {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "op"
+        ],
+        "properties": {
+          "op": {
+            "const": "clear"
+          }
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "name": "template-plus-workstation",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Local avatar and iPhone Air print-and-cut design workstation",
+  "scripts": {
+    "start": "node server.mjs",
+    "avatar": "node cli.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "sticker": "node sticker-cli.mjs"
+  },
+  "dependencies": {
+    "@xmldom/xmldom": "^0.9.12",
+    "pdfkit": "^0.20.2",
+    "sharp": "^0.35.5",
+    "svg-to-pdfkit": "^0.1.8"
+  },
+  "engines": {
+    "node": ">=20.9.0"
+  },
+  "devDependencies": {
+    "pdf-lib": "^1.17.1",
+    "potrace": "^2.1.8"
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "source": "https://developer.apple.com/download/files/accessories/dimensional-drawings/iphone-air.pdf",
+  "source_sheet": "1: labeled positions and diameters; 3: vector plateau outline",
+  "orientation": "rear view, upright, camera at left, not mirrored",
+  "official_centers_from_phone_top_left_mm": {
+    "camera": [
+      16.29,
+      16.29
+    ],
+    "microphone": [
+      51.34,
+      16.29
+    ],
+    "flash": [
+      58.42,
+      16.29
+    ]
+  },
+  "official_nominal_diameters_mm": {
+    "camera_outer_ring": 15.82,
+    "microphone": 2.3,
+    "flash": 6.3
+  },
+  "derived_flat_top_width_height_mm": [
+    65.15689236188528,
+    23.528608373835148
+  ],
+  "derived_flat_top_origin_from_phone_top_left_mm": [
+    4.772233022695842,
+    4.527459312435912
+  ],
+  "local_holes_name_x_y_diameter_mm": [
+    [
+      "camera",
+      11.517766977304158,
+      11.762540687564087,
+      15.82
+    ],
+    [
+      "microphone",
+      46.56776697730416,
+      11.762540687564087,
+      2.3
+    ],
+    [
+      "flash",
+      53.64776697730416,
+      11.762540687564087,
+      6.3
+    ]
+  ],
+  "pixels": [
+    6516,
+    2353
+  ],
+  "dpi": 2540,
+  "manufacturing_clearance_mm": 0,
+  "boundary": "Flat plateau surface outline; excludes sloped surrounding transition"
+}

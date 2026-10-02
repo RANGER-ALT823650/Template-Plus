@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="360" viewBox="0 0 320 360" role="img" aria-labelledby="title desc">
+  <title id="title">玫红爱心墨镜公仔</title>
+  <desc id="desc">参考第一张图片补全轮廓和配饰，参考第二张图片绘制鲜艳配色。透明背景，可编辑矢量路径，无内嵌位图。</desc>
+  <defs>
+    <radialGradient id="magenta-body-fill" cx="34%" cy="25%" r="88%">
+      <stop offset="0" stop-color="#FF77DE"/>
+      <stop offset=".48" stop-color="#FF2EC8"/>
+      <stop offset="1" stop-color="#DF21AC"/>
+    </radialGradient>
+    <linearGradient id="magenta-black" x1="0" y1="0" x2=".7" y2="1" gradientUnits="objectBoundingBox">
+      <stop stop-color="#353638"/>
+      <stop offset=".55" stop-color="#202224"/>
+      <stop offset="1" stop-color="#111315"/>
+    </linearGradient>
+  </defs>
+  
+  <g id="magenta-character">
+    <path id="magenta-body" d="M161 93C145 66 116 54 91 61C60 69 40 95 42 127C44 161 66 189 88 216L140 278C153 294 168 298 183 285L242 233C264 213 285 190 289 161C294 127 278 98 249 87C220 76 190 78 170 98Z" fill="url(#magenta-body-fill)"/>
+    <g id="magenta-sunglasses" fill="url(#magenta-black)" stroke="#242628" stroke-width="5" stroke-linecap="round">
+      <path d="M131 156Q145 141 160 159" fill="none"/>
+      <path d="M79 140L60 133M212 171L237 174" fill="none"/>
+      <circle cx="106" cy="148" r="27" stroke="none"/>
+      <circle cx="186" cy="168" r="27" stroke="none"/>
+    </g>
+  </g>
+</svg>

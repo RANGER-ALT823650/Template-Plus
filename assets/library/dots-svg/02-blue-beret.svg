@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="360" viewBox="0 0 320 360" role="img" aria-labelledby="title desc">
+  <title id="title">蓝色贝雷帽公仔</title>
+  <desc id="desc">参考第一张图片补全轮廓和配饰，参考第二张图片绘制鲜艳配色。透明背景，可编辑矢量路径，无内嵌位图。</desc>
+  <defs>
+    <radialGradient id="blue-body-fill" cx="34%" cy="25%" r="88%">
+      <stop offset="0" stop-color="#45B9FF"/>
+      <stop offset=".48" stop-color="#098FFF"/>
+      <stop offset="1" stop-color="#0879E8"/>
+    </radialGradient>
+    <linearGradient id="blue-black" x1="0" y1="0" x2=".7" y2="1" gradientUnits="objectBoundingBox">
+      <stop stop-color="#353638"/>
+      <stop offset=".55" stop-color="#202224"/>
+      <stop offset="1" stop-color="#111315"/>
+    </linearGradient>
+  </defs>
+  
+  <g id="blue-character">
+    <path id="blue-body" d="M102 104C119 82 150 73 174 90C192 73 221 80 237 101C254 121 253 150 243 169C266 179 277 201 273 224C270 251 252 269 226 272C223 299 201 312 178 308C162 306 151 298 144 289C126 309 96 308 80 290C70 279 66 265 68 251C39 249 24 228 27 206C29 188 40 177 53 168C44 140 57 113 82 105C88 103 95 103 102 104Z" fill="url(#blue-body-fill)"/>
+    <g id="blue-beret" fill="url(#blue-black)">
+      <path id="blue-beret-stem" d="M145 69C139 61 141 49 150 47C160 43 169 52 168 62L164 75Z"/>
+      <path id="blue-beret-crown" d="M36 159C39 136 59 112 84 92C115 68 155 56 185 62C208 66 222 81 217 99C213 115 191 122 168 131C127 147 108 164 87 186C72 202 53 214 42 205C31 197 31 178 36 159Z"/>
+      <path d="M42 163C60 118 122 73 171 72" fill="none" stroke="#494A4C" stroke-width="3" stroke-linecap="round" opacity=".5"/>
+    </g>
+    <g id="blue-eyes" fill="#121416">
+      <ellipse cx="132" cy="205" rx="8" ry="12" transform="rotate(-9 132 205)"/>
+      <ellipse cx="181" cy="188" rx="8" ry="12" transform="rotate(-9 181 188)"/>
+    </g>
+  </g>
+</svg>

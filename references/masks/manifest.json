@@ -1,0 +1,42 @@
+[
+  {
+    "id": "circle",
+    "transform": "translate(0 0) scale(2.5) scale(.25)",
+    "height": 80
+  },
+  {
+    "id": "oval",
+    "transform": "translate(0 0) scale(2.5) scale(.25)",
+    "height": 80
+  },
+  {
+    "id": "square",
+    "transform": "translate(0 0) scale(2.5) scale(.25)",
+    "height": 80
+  },
+  {
+    "id": "capsule",
+    "transform": "translate(0 0) scale(2.5) scale(.25)",
+    "height": 80
+  },
+  {
+    "id": "triangle",
+    "transform": "translate(0 0) scale(2.5) scale(.25)",
+    "height": 80
+  },
+  {
+    "id": "hexagon",
+    "transform": "translate(0 0) scale(2.5) scale(.25)",
+    "height": 80
+  },
+  {
+    "id": "cloud",
+    "transform": "translate(0 0) scale(2.5) scale(.25)",
+    "height": 80
+  },
+  {
+    "id": "drop",
+    "transform": "translate(4.416 -12.208) scale(1.038961) scale(.25)",
+    "height": 224
+  }
+]

@@ -1,0 +1,26 @@
+[
+  {
+    "id": "skyblue",
+    "name": "天蓝色",
+    "file": "/assets/iphone-air/mockups/skyblue.png",
+    "source": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/iphone-air-finish-select-skyblue-202509?wid=940&hei=1112&fmt=png-alpha&.v=NUpaQVl1bitSNmJWZUdKdi9QZHhsSTc3enVEMmlQcEEzL2lLSlkvSU10ZjhHWUFlMUJvbytPdDJaMXVCZ3hWK3RiU3ZsS20zTE4xZTVGRXpySFRUZnhKQnpOUmx4ZGN3eXhkWm5HTmRKRHZPNk91aGNwTzdaL0RpcGZCOEdDdXU"
+  },
+  {
+    "id": "spaceblack",
+    "name": "深空黑色",
+    "file": "/assets/iphone-air/mockups/spaceblack.png",
+    "source": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/iphone-air-finish-select-spaceblack-202509?wid=940&hei=1112&fmt=png-alpha&.v=NUpaQVl1bitSNmJWZUdKdi9QZHhsT1EwWVYrK0M3QzlJTEFOMng5bDMrejN1UXliTFpDL21tQnFzeFc2TCs3QVgyaWxBVG1PRTU2YzhCN2c2emhzWG1EbG02UTA1WVduVEpGbUMyTTJuNVV2QklpRitnVTEwSUE3aENBT3VWNzk"
+  },
+  {
+    "id": "cloudwhite",
+    "name": "云白色",
+    "file": "/assets/iphone-air/mockups/cloudwhite.png",
+    "source": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/iphone-air-finish-select-cloudwhite-202509?wid=940&hei=1112&fmt=png-alpha&.v=NUpaQVl1bitSNmJWZUdKdi9QZHhsTS8xdU11cWJCczZ1VVpEY09DWGZFdG9rUmM5L0VxemJPNnRHVmtSWFVtQVgyaWxBVG1PRTU2YzhCN2c2emhzWG1EbG02UTA1WVduVEpGbUMyTTJuNVZvSWRyb0g1dWM0TnhmcUpxVTA1bXc"
+  },
+  {
+    "id": "lightgold",
+    "name": "浅金色",
+    "file": "/assets/iphone-air/mockups/lightgold.png",
+    "source": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/iphone-air-finish-select-lightgold-202509?wid=940&hei=1112&fmt=png-alpha&.v=NUpaQVl1bitSNmJWZUdKdi9QZHhsQ0FRNjA2a0FndFVGandMdTMzMTI3T0Nvd0w2dVF4Vk1peXVBQ1A5RnFJblQ5NVJ4OStiQklybHZqYkJwOUI0UWpLeDJBOVg1WWI4SnpydnJleTJOaVBPdXQzMlBmb1p0VFkzYVZUVnExVE4"
+  }
+]

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="360" viewBox="0 0 320 360" role="img" aria-labelledby="title desc">
+  <title id="title">粉色耳机公仔</title>
+  <desc id="desc">参考第一张图片补全轮廓和配饰，参考第二张图片绘制鲜艳配色。透明背景，可编辑矢量路径，无内嵌位图。</desc>
+  <defs>
+    <radialGradient id="pink-body-fill" cx="34%" cy="25%" r="88%">
+      <stop offset="0" stop-color="#FFAAC5"/>
+      <stop offset=".48" stop-color="#FF83AD"/>
+      <stop offset="1" stop-color="#F56C99"/>
+    </radialGradient>
+    <linearGradient id="pink-black" x1="0" y1="0" x2=".7" y2="1" gradientUnits="objectBoundingBox">
+      <stop stop-color="#353638"/>
+      <stop offset=".55" stop-color="#202224"/>
+      <stop offset="1" stop-color="#111315"/>
+    </linearGradient>
+  </defs>
+  
+  <g id="pink-character">
+    <path id="pink-top-tuft" d="M126 115C111 100 112 82 125 76C137 70 147 76 156 82C166 71 181 74 188 85C195 96 187 109 179 118Z" fill="url(#pink-body-fill)"/>
+    <path id="pink-body" d="M151 103C198 102 235 126 246 167C259 214 241 259 201 277C163 294 117 279 95 246C78 220 77 180 90 151C103 124 124 108 151 103Z" fill="url(#pink-body-fill)"/>
+    <g id="pink-headphones" fill="none" stroke="url(#pink-black)" stroke-linecap="round">
+      <path d="M82 200C76 145 106 106 150 102C191 98 225 117 239 152" stroke-width="10"/>
+      <path d="M87 198C84 155 110 119 145 113" stroke="#494A4C" stroke-width="2.5" opacity=".65"/>
+    </g>
+    <path id="pink-left-earcup" d="M79 180C67 183 62 203 66 223C68 237 75 245 86 241C94 238 92 223 90 207C88 193 88 179 79 180Z" fill="url(#pink-black)"/>
+    <path id="pink-right-earcup" d="M241 176C251 180 256 196 254 212C253 222 249 229 243 229C239 230 236 223 237 214C239 200 239 187 241 176Z" fill="url(#pink-black)"/>
+    <g id="pink-sleepy-eyes" fill="none" stroke="#202224" stroke-width="5" stroke-linecap="round">
+      <path d="M114 180Q130 195 146 181"/>
+      <path d="M172 177Q188 186 201 171"/>
+    </g>
+  </g>
+</svg>

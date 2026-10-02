@@ -1,0 +1,121 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <title>MUSE · 跑步机</title>
+  <defs>
+    <radialGradient id="fur" gradientUnits="userSpaceOnUse" cx="-58.15" cy="-205.71" r="330">
+      <stop offset="0" stop-color="#FBF6EE"/>
+      <stop offset="0.5" stop-color="#EFE5D5"/>
+      <stop offset="1" stop-color="#DCCAB1"/>
+    </radialGradient>
+    <radialGradient id="faceFill" cx="0.5" cy="0.62" r="0.62">
+      <stop offset="0" stop-color="#FFF8EF"/>
+      <stop offset="1" stop-color="#F6E7D6"/>
+    </radialGradient>
+    <filter id="plush" x="-25%" y="-25%" width="150%" height="150%" color-interpolation-filters="sRGB">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="15" result="b"/>
+      <feOffset in="b" dx="-10.1" dy="-12.17" result="bs"/>
+      <feComposite in="SourceAlpha" in2="bs" operator="arithmetic" k2="1" k3="-1" result="sm"/>
+      <feFlood flood-color="#A98A67" flood-opacity="0.62"/>
+      <feComposite in2="sm" operator="in" result="shadow"/>
+      <feGaussianBlur in="SourceAlpha" stdDeviation="40" result="b2"/>
+      <feOffset in="b2" dx="-2.61" dy="-29.89" result="bs2"/>
+      <feComposite in="SourceAlpha" in2="bs2" operator="arithmetic" k2="1" k3="-1" result="am"/>
+      <feFlood flood-color="#B89C7A" flood-opacity="0.35"/>
+      <feComposite in2="am" operator="in" result="ambient"/>
+      <feOffset in="b" dx="7.93" dy="10.35" result="bh"/>
+      <feComposite in="SourceAlpha" in2="bh" operator="arithmetic" k2="1" k3="-1" result="hm"/>
+      <feFlood flood-color="#FFFFFF" flood-opacity="0.75"/>
+      <feComposite in2="hm" operator="in" result="hl"/>
+      <feMerge>
+        <feMergeNode in="SourceGraphic"/>
+        <feMergeNode in="ambient"/>
+        <feMergeNode in="shadow"/>
+        <feMergeNode in="hl"/>
+      </feMerge>
+      <feComposite in2="SourceAlpha" operator="in"/>
+    </filter>
+    <filter id="limb" x="-40%" y="-40%" width="180%" height="180%" color-interpolation-filters="sRGB">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="6" result="b"/>
+      <feOffset in="b" dx="2.6" dy="6.8" result="drop"/>
+      <feFlood flood-color="#9C7C5B" flood-opacity="0.38"/>
+      <feComposite in2="drop" operator="in" result="dropShadow"/>
+      <feOffset in="b" dx="-4.54" dy="-5.47" result="bs"/>
+      <feComposite in="SourceAlpha" in2="bs" operator="arithmetic" k2="1" k3="-1" result="sm"/>
+      <feFlood flood-color="#A98A67" flood-opacity="0.55"/>
+      <feComposite in2="sm" operator="in" result="shadow"/>
+      <feOffset in="b" dx="3.57" dy="4.66" result="bh"/>
+      <feComposite in="SourceAlpha" in2="bh" operator="arithmetic" k2="1" k3="-1" result="hm"/>
+      <feFlood flood-color="#FFFFFF" flood-opacity="0.7"/>
+      <feComposite in2="hm" operator="in" result="hl"/>
+      <feMerge result="lit">
+        <feMergeNode in="SourceGraphic"/>
+        <feMergeNode in="shadow"/>
+        <feMergeNode in="hl"/>
+      </feMerge>
+      <feComposite in="lit" in2="SourceAlpha" operator="in" result="litClip"/>
+      <feMerge>
+        <feMergeNode in="dropShadow"/>
+        <feMergeNode in="litClip"/>
+      </feMerge>
+    </filter>
+    <filter id="inset" x="-20%" y="-20%" width="140%" height="140%" color-interpolation-filters="sRGB">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="5" result="b"/>
+      <feOffset in="b" dx="0.78" dy="8.97" result="bs"/>
+      <feComposite in="SourceAlpha" in2="bs" operator="arithmetic" k2="1" k3="-1" result="sm"/>
+      <feFlood flood-color="#B8966F" flood-opacity="0.7"/>
+      <feComposite in2="sm" operator="in" result="shadow"/>
+      <feMerge>
+        <feMergeNode in="SourceGraphic"/>
+        <feMergeNode in="shadow"/>
+      </feMerge>
+      <feComposite in2="SourceAlpha" operator="in"/>
+    </filter>
+    <filter id="soft" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3"/>
+    </filter>
+    <filter id="prop" x="-20%" y="-20%" width="140%" height="140%" color-interpolation-filters="sRGB">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="4" result="b"/>
+      <feOffset in="b" dx="0" dy="4" result="bo"/>
+      <feFlood flood-color="#6B5440" flood-opacity="0.18"/>
+      <feComposite in2="bo" operator="in" result="drop"/>
+      <feMerge>
+        <feMergeNode in="drop"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <g filter="url(#prop)">
+    <rect x="58" y="404" width="396" height="38" rx="19" fill="#9AA6B6"/>
+    <rect x="58" y="404" width="396" height="20" rx="10" fill="#C3CCD8"/>
+    <rect x="96" y="394" width="320" height="22" rx="11" fill="#2F3642"/>
+    <rect x="110" y="398" width="292" height="4" rx="2" fill="#4A5363"/>
+    <rect x="54" y="392" width="54" height="42" rx="21" fill="#DDE3EB"/>
+    <rect x="404" y="392" width="54" height="42" rx="21" fill="#DDE3EB"/>
+    <circle cx="81" cy="413" r="8" fill="#FF6B4A"/>
+    <circle cx="431" cy="413" r="8" fill="#FF6B4A"/>
+    <rect x="124" y="428" width="264" height="6" rx="3" fill="#FF6B4A"/>
+    <rect x="92" y="440" width="26" height="10" rx="5" fill="#3A404C"/>
+    <rect x="394" y="440" width="26" height="10" rx="5" fill="#3A404C"/>
+  </g>
+  <g transform="translate(246 384) rotate(5) scale(1.12)">
+    
+    <g filter="url(#plush)">
+      <path d="M-40,-22 L-50,0" fill="none" stroke="url(#fur)" stroke-width="46" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M42,-40 L60,-26" fill="none" stroke="url(#fur)" stroke-width="46" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M-84,-122 Q-116,-102 -134,-84" fill="none" stroke="url(#fur)" stroke-width="38" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M84,-126 Q120,-128 132,-156" fill="none" stroke="url(#fur)" stroke-width="38" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M0,-262 C63,-262 93,-214 97,-160 C101,-110 118,-72 116,-36 C114,-8 90,4 0,4 C-90,4 -114,-8 -116,-36 C-118,-72 -101,-110 -97,-160 C-93,-214 -63,-262 0,-262 Z" fill="url(#fur)"/>
+    </g>
+    <ellipse cx="0" cy="-178" rx="60" ry="47" fill="url(#faceFill)" filter="url(#inset)"/>
+    <ellipse cx="-37" cy="-166" rx="11" ry="6.5" fill="#F59C95" opacity="0.75" filter="url(#soft)"/>
+    <ellipse cx="37" cy="-166" rx="11" ry="6.5" fill="#F59C95" opacity="0.75" filter="url(#soft)"/>
+    <ellipse cx="-23" cy="-181" rx="6.4" ry="7.8" fill="#2B211D"/>
+    <circle cx="-21" cy="-184" r="2.2" fill="#FFFFFF"/>
+    <ellipse cx="23" cy="-181" rx="6.4" ry="7.8" fill="#2B211D"/>
+    <circle cx="25" cy="-184" r="2.2" fill="#FFFFFF"/>
+    <path d="M-7,-170 Q0,-163 7,-170" fill="none" stroke="#6A463A" stroke-width="3.2" stroke-linecap="round"/>
+    
+    
+    
+  </g>
+</svg>

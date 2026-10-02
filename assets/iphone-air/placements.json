@@ -1,0 +1,280 @@
+{
+  "seed": 20260930,
+  "size_mm": [
+    65.15689236188528,
+    23.528608373835148
+  ],
+  "background": "transparent",
+  "minimum_boundary_and_hole_clearance_mm": 1.2,
+  "minimum_character_gap_mm": 0.7,
+  "styles": [
+    {
+      "style": 1,
+      "characters": [
+        {
+          "shape": "drop",
+          "color": "pink",
+          "center_mm": [
+            25,
+            6.2
+          ],
+          "canvas_size_mm": 8.6,
+          "angle_degrees": -19,
+          "source_svg": "Template/output/air-sticker-avatars/style-01-1-drop-pink.svg"
+        },
+        {
+          "shape": "capsule",
+          "color": "blue",
+          "center_mm": [
+            27,
+            17.1
+          ],
+          "canvas_size_mm": 8.0,
+          "angle_degrees": 16,
+          "source_svg": "Template/output/air-sticker-avatars/style-01-2-capsule-blue.svg"
+        },
+        {
+          "shape": "hexagon",
+          "color": "purple",
+          "center_mm": [
+            37.3,
+            11.0
+          ],
+          "canvas_size_mm": 9.3,
+          "angle_degrees": -10,
+          "source_svg": "Template/output/air-sticker-avatars/style-01-3-hexagon-purple.svg"
+        },
+        {
+          "shape": "oval",
+          "color": "brown",
+          "center_mm": [
+            48.5,
+            5.1
+          ],
+          "canvas_size_mm": 6.5863,
+          "angle_degrees": 24,
+          "source_svg": "Template/output/air-sticker-avatars/style-01-4-oval-brown.svg"
+        },
+        {
+          "shape": "square",
+          "color": "teal",
+          "center_mm": [
+            53.2,
+            19.0
+          ],
+          "canvas_size_mm": 4.940741650196017,
+          "angle_degrees": -16,
+          "source_svg": "Template/output/air-sticker-avatars/style-01-5-square-teal.svg"
+        }
+      ],
+      "pdf": "iphone-air-style-01.pdf",
+      "checks": {
+        "unique_shapes": 5,
+        "unique_colors": 5,
+        "boundary_and_hole_clearance": "passed",
+        "character_spacing": "passed"
+      }
+    },
+    {
+      "style": 2,
+      "characters": [
+        {
+          "shape": "triangle",
+          "color": "brown",
+          "center_mm": [
+            25.2,
+            14.8
+          ],
+          "canvas_size_mm": 8.4,
+          "angle_degrees": 23,
+          "source_svg": "Template/output/air-sticker-avatars/style-02-1-triangle-brown.svg"
+        },
+        {
+          "shape": "capsule",
+          "color": "purple",
+          "center_mm": [
+            31.0,
+            5.8
+          ],
+          "canvas_size_mm": 8.3,
+          "angle_degrees": -14,
+          "source_svg": "Template/output/air-sticker-avatars/style-02-2-capsule-purple.svg"
+        },
+        {
+          "shape": "drop",
+          "color": "blue",
+          "center_mm": [
+            39.6,
+            17.7
+          ],
+          "canvas_size_mm": 8.0,
+          "angle_degrees": -25,
+          "source_svg": "Template/output/air-sticker-avatars/style-02-3-drop-blue.svg"
+        },
+        {
+          "shape": "cloud",
+          "color": "pink",
+          "center_mm": [
+            43.0,
+            6.0
+          ],
+          "canvas_size_mm": 7.4,
+          "angle_degrees": 13,
+          "source_svg": "Template/output/air-sticker-avatars/style-02-4-cloud-pink.svg"
+        },
+        {
+          "shape": "circle",
+          "color": "red",
+          "center_mm": [
+            55.5,
+            19.0
+          ],
+          "canvas_size_mm": 4.780581174,
+          "angle_degrees": 29,
+          "source_svg": "Template/output/air-sticker-avatars/style-02-5-circle-red.svg"
+        }
+      ],
+      "pdf": "iphone-air-style-02.pdf",
+      "checks": {
+        "unique_shapes": 5,
+        "unique_colors": 5,
+        "boundary_and_hole_clearance": "passed",
+        "character_spacing": "passed"
+      }
+    },
+    {
+      "style": 3,
+      "characters": [
+        {
+          "shape": "hexagon",
+          "color": "blue",
+          "center_mm": [
+            24.4,
+            7.0
+          ],
+          "canvas_size_mm": 7.8,
+          "angle_degrees": -27,
+          "source_svg": "Template/output/air-sticker-avatars/style-03-1-hexagon-blue.svg"
+        },
+        {
+          "shape": "circle",
+          "color": "brown",
+          "center_mm": [
+            30.3,
+            17.3
+          ],
+          "canvas_size_mm": 9.1,
+          "angle_degrees": 12,
+          "source_svg": "Template/output/air-sticker-avatars/style-03-2-circle-brown.svg"
+        },
+        {
+          "shape": "capsule",
+          "color": "red",
+          "center_mm": [
+            37.0,
+            6.8
+          ],
+          "canvas_size_mm": 8.4,
+          "angle_degrees": 20,
+          "source_svg": "Template/output/air-sticker-avatars/style-03-3-capsule-red.svg"
+        },
+        {
+          "shape": "square",
+          "color": "purple",
+          "center_mm": [
+            46.0,
+            18.4
+          ],
+          "canvas_size_mm": 7.0,
+          "angle_degrees": -18,
+          "source_svg": "Template/output/air-sticker-avatars/style-03-4-square-purple.svg"
+        },
+        {
+          "shape": "cloud",
+          "color": "green",
+          "center_mm": [
+            55.0,
+            4.7
+          ],
+          "canvas_size_mm": 6.1,
+          "angle_degrees": -12,
+          "source_svg": "Template/output/air-sticker-avatars/style-03-5-cloud-green.svg"
+        }
+      ],
+      "pdf": "iphone-air-style-03.pdf",
+      "checks": {
+        "unique_shapes": 5,
+        "unique_colors": 5,
+        "boundary_and_hole_clearance": "passed",
+        "character_spacing": "passed"
+      }
+    },
+    {
+      "style": 4,
+      "characters": [
+        {
+          "shape": "triangle",
+          "color": "yellow",
+          "center_mm": [
+            24.3,
+            16.4
+          ],
+          "canvas_size_mm": 7.1,
+          "angle_degrees": 17,
+          "source_svg": "Template/output/air-sticker-avatars/style-04-1-triangle-yellow.svg"
+        },
+        {
+          "shape": "capsule",
+          "color": "orange",
+          "center_mm": [
+            30.0,
+            6.5
+          ],
+          "canvas_size_mm": 9.0,
+          "angle_degrees": -22,
+          "source_svg": "Template/output/air-sticker-avatars/style-04-2-capsule-orange.svg"
+        },
+        {
+          "shape": "drop",
+          "color": "purple",
+          "center_mm": [
+            37.8,
+            16.8
+          ],
+          "canvas_size_mm": 8.4,
+          "angle_degrees": 27,
+          "source_svg": "Template/output/air-sticker-avatars/style-04-3-drop-purple.svg"
+        },
+        {
+          "shape": "hexagon",
+          "color": "blue",
+          "center_mm": [
+            44.4,
+            5.2
+          ],
+          "canvas_size_mm": 6.8,
+          "angle_degrees": -15,
+          "source_svg": "Template/output/air-sticker-avatars/style-04-4-hexagon-blue.svg"
+        },
+        {
+          "shape": "circle",
+          "color": "green",
+          "center_mm": [
+            55.2,
+            19.0
+          ],
+          "canvas_size_mm": 5.090291922121119,
+          "angle_degrees": 21,
+          "source_svg": "Template/output/air-sticker-avatars/style-04-5-circle-green.svg"
+        }
+      ],
+      "pdf": "iphone-air-style-04.pdf",
+      "checks": {
+        "unique_shapes": 5,
+        "unique_colors": 5,
+        "boundary_and_hole_clearance": "passed",
+        "character_spacing": "passed"
+      }
+    }
+  ]
+}
