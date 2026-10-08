@@ -1,4 +1,4 @@
-import {normalizeConfig,renderSVG} from './avatar.js';
+import {normalizeConfig,renderSVG} from './avatar.js?v=20261008-shapes';
 import {getPhone,getPlateau} from './phones.js';
 import {importSVG} from './svg-import.js';
 import {importPNG,MAX_LAYOUT_BYTES} from './png-import.js';

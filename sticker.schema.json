@@ -95,7 +95,13 @@
                       "triangle",
                       "hexagon",
                       "cloud",
-                      "drop"
+                      "drop",
+                      "sparkle",
+                      "clover",
+                      "heart",
+                      "flower",
+                      "pentagon",
+                      "star"
                     ],
                     "default": "drop"
                   },

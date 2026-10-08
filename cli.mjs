@@ -16,7 +16,7 @@ const HELP=`Little Shape Studio — GUI / Agent 共用的形象模板
       --format <svg|png|webp> --out <path> --formats <comma-separated formats>
 
 render 可将 SVG 写到 stdout：--out - --format svg。错误退出码为 1。
-batch 导出 88 种组合，并写入 manifest.json。显式参数覆盖配置文件。
+batch 导出全部形状与颜色组合，并写入 manifest.json。显式参数覆盖配置文件。
 `;
 const formats=['svg','png','webp'];
 async function save(config,format,path) {
@@ -39,7 +39,7 @@ try {
   if(v.help || !command){process.stdout.write(HELP);}
   else if(command==='list') {
     if(p.length>1) throw new Error('list 不接收位置参数');
-    const data={version:1,shapes:SHAPES.map(({id,name})=>({id,name})),colors:COLORS,combinations:88,formats};
+    const data={version:1,shapes:SHAPES.map(({id,name})=>({id,name})),colors:COLORS,combinations:SHAPES.length*COLORS.length,formats};
     process.stdout.write(v.json?JSON.stringify(data,null,2)+'\n':`图案：${data.shapes.map(s=>s.id).join(', ')}\n颜色：${COLORS.map(c=>`${c.id} (${c.hex})`).join(', ')}\n`);
   } else if(['render','batch'].includes(command)) {
     if(p.length!==1) throw new Error('多余的位置参数');

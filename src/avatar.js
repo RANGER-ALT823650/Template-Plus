@@ -1,9 +1,10 @@
 import { REFERENCE } from './reference-data.js';
+import { ADDITIONAL_SHAPES } from './additional-shapes.js';
 
 export const SHAPES = [
   ['circle','圆形'],['oval','椭圆'],['square','圆角方形'],['capsule','胶囊'],
   ['triangle','圆角三角'],['hexagon','六边形'],['cloud','云朵'],['drop','水滴'],
-].map(([id,name])=>({id,name,...REFERENCE.bodies[id]}));
+].map(([id,name])=>({id,name,...REFERENCE.bodies[id]})).concat(ADDITIONAL_SHAPES);
 export const COLORS = ['black','brown','red','orange','yellow','green','teal','blue','purple','pink','gray']
   .map((id,i)=>({id,name:['黑色','棕色','红色','橙色','黄色','绿色','青色','蓝色','紫色','粉色','灰色'][i],hex:REFERENCE.colors[i]}));
 export const DEFAULT_CONFIG = Object.freeze({version:1,shape:'drop',color:'brown',size:1024,padding:16,background:'transparent'});

@@ -5,7 +5,7 @@
   "additionalProperties": false,
   "properties": {
     "version": {"const": 1, "default": 1},
-    "shape": {"enum": ["circle","oval","square","capsule","triangle","hexagon","cloud","drop"], "default": "drop"},
+    "shape": {"enum": ["circle","oval","square","capsule","triangle","hexagon","cloud","drop","sparkle","clover","heart","flower","pentagon","star"], "default": "drop"},
     "color": {"enum": ["black","brown","red","orange","yellow","green","teal","blue","purple","pink","gray"], "default": "brown"},
     "size": {"type": "integer", "minimum": 64, "maximum": 4096, "default": 1024},
     "padding": {"type": "number", "minimum": 0, "maximum": 40, "default": 16},

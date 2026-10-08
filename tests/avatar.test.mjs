@@ -7,6 +7,7 @@ import {execFileSync,spawnSync} from 'node:child_process';
 import sharp from 'sharp';
 import {SHAPES,COLORS,normalizeConfig,renderSVG,DEFAULT_CONFIG} from '../src/avatar.js';
 import {REFERENCE} from '../src/reference-data.js';
+import {ADDITIONAL_SHAPES} from '../src/additional-shapes.js';
 
 test('traced vectors preserve screenshot silhouettes at native resolution',async()=>{
   for(const [id,shape] of [...Object.entries(REFERENCE.bodies),['eyes',REFERENCE.eyes]]){
@@ -20,8 +21,21 @@ test('traced vectors preserve screenshot silhouettes at native resolution',async
   }
 });
 
-test('all 88 combinations retain exact body color, white eyes, and transparency',async()=>{
-  assert.equal(SHAPES.length,8);assert.equal(COLORS.length,11);
+test('additional shapes preserve the supplied screenshot silhouettes',async()=>{
+  const manifest=JSON.parse(await readFile('references/additional-shapes/manifest.json','utf8'));
+  for(const {id,width,height} of manifest){
+    const shape=ADDITIONAL_SHAPES.find(s=>s.id===id);
+    const mask=await sharp(`references/additional-shapes/${id}.png`).greyscale().raw().toBuffer();
+    const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}"><path d="${shape.path}"/></svg>`;
+    const rgba=await sharp(Buffer.from(svg)).ensureAlpha().raw().toBuffer();
+    let intersection=0,union=0;
+    for(let i=0;i<mask.length;i++){const source=mask[i]<128,vector=rgba[i*4+3]>=128;intersection+=source&&vector;union+=source||vector;}
+    assert.ok(intersection/union>.99,`${id}: screenshot silhouette fidelity`);
+  }
+});
+
+test('all 154 combinations retain exact body color, white eyes, and transparency',async()=>{
+  assert.equal(SHAPES.length,14);assert.equal(COLORS.length,11);
   for(const shape of SHAPES){
     const body=await sharp(Buffer.from(renderSVG({shape:shape.id,size:200,padding:10},{eyes:false}))).ensureAlpha().raw().toBuffer();
     for(const color of COLORS){
@@ -47,7 +61,7 @@ test('strict configuration validation and white background',async()=>{
 test('CLI recipe round trip, raster formats, batch manifest, and error exit codes',async()=>{
   const dir=await mkdtemp(join(tmpdir(),'little-shapes-'));
   const run=args=>execFileSync(process.execPath,['cli.mjs',...args],{encoding:'utf8'});
-  const listed=JSON.parse(run(['list','--json']));assert.equal(listed.combinations,88);
+  const listed=JSON.parse(run(['list','--json']));assert.equal(listed.combinations,154);
   for(const format of ['svg','png','webp']){
     const path=join(dir,`drop.${format}`);
     const result=JSON.parse(run(['render','--config','examples/avatar.json','--size','256','--out',path,'--json']));
@@ -57,8 +71,8 @@ test('CLI recipe round trip, raster formats, batch manifest, and error exit code
   }
   assert.equal(run(['render','--out','-','--format','svg']).trim(),renderSVG());
   const batch=JSON.parse(run(['batch','--out',join(dir,'all'),'--formats','svg,png','--size','64','--json']));
-  assert.equal(batch.count,176);assert.equal((await readdir(join(dir,'all'))).length,177);
-  const manifest=JSON.parse(await readFile(batch.manifest,'utf8'));assert.equal(manifest.files.length,176);
+  assert.equal(batch.count,308);assert.equal((await readdir(join(dir,'all'))).length,309);
+  const manifest=JSON.parse(await readFile(batch.manifest,'utf8'));assert.equal(manifest.files.length,308);
   for(const args of [['render','--shape','wrong'],['render','--out','x.png','--format','svg'],['batch','--formats','svg,svg'],['render','--size','NaN'],['render','--out','-','--format','svg','--json']]){
     const result=spawnSync(process.execPath,['cli.mjs',...args],{encoding:'utf8'});assert.equal(result.status,1);assert.equal(JSON.parse(result.stderr).ok,false);
   }

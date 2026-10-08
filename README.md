@@ -1,6 +1,6 @@
 # Template Plus · 贴纸工作站
 
-独立于相邻 `Template/` 的本地工作站。原有形象编辑器、8 种轮廓、11 种参考颜色、固定白色眼睛、88 种组合、SVG / PNG / WebP、配置导入导出和原 CLI 全部保留。新的首页用于在 iPhone Air、17 / 18 Pro 与 Pro Max 平台底图上排版多个形象，再导出实际尺寸印切 PDF。
+独立于相邻 `Template/` 的本地工作站。原有形象编辑器、14 种轮廓、11 种参考颜色、固定白色眼睛、154 种组合、SVG / PNG / WebP、配置导入导出和原 CLI 全部保留。新的首页用于在 iPhone Air、17 / 18 Pro 与 Pro Max 平台底图上排版多个形象，再导出实际尺寸印切 PDF。
 
 ## 打开工作站
 
@@ -59,7 +59,7 @@ SVG 是透明印刷图案，毫米尺寸，无刀线，PNG 素材作为内嵌图
 |iPhone 18 Pro|61.6033 × 37.7286|65.6033 × 41.7286|6|
 |iPhone 18 Pro Max|67.7312 × 37.7268|71.7312 × 41.7268|6|
 
-原始 PDF 保存在 `assets/phones/sources/`，每款底图、来源 URL、SHA-256、孔位、标称机身尺寸和推导方法在 `assets/phones/<机型>/dimensions.json`；生成脚本为 `scripts/build-pro-plateaus.py`（需要 pdfplumber）和 `scripts/build-pro-mockups.mjs`。17 配色参考 [Apple 官方规格](https://support.apple.com/zh-cn/125090)，18 配色参考 [Apple 官方规格](https://www.apple.com.cn/iphone-18-pro/specs/)。这些修改仅用于本地工作站，没有更新或发布 `cloud/`。
+原始 PDF 保存在 `assets/phones/sources/`，每款底图、来源 URL、SHA-256、孔位、标称机身尺寸和推导方法在 `assets/phones/<机型>/dimensions.json`；生成脚本为 `scripts/build-pro-plateaus.py`（需要 pdfplumber）和 `scripts/build-pro-mockups.mjs`。17 配色参考 [Apple 官方规格](https://support.apple.com/zh-cn/125090)，18 配色参考 [Apple 官方规格](https://www.apple.com.cn/iphone-18-pro/specs/)。云端版本位于 `cloud/`，同样提供五款机型与全部形象轮廓。
 
 ## 命令行
 
@@ -109,6 +109,8 @@ node sticker-cli.mjs render --config iphone-air-layout.json --out output/my-stic
 npm test
 ```
 
-测试覆盖原 88 种形象 / 参考轮廓 / 原 CLI，以及布局与 SVG 导入验证、孔位透明裁剪、PDF 毫米尺寸 / 双图层 / CutContour 专色 / 刀线打印关闭、PNG 像素与 DPI、新 CLI 的实际文件输出、Agent 创作 / 编辑 / 批处理 / stdin 管道 / 失败不落盘 / 整机预览，四款 Pro 的六孔裁剪和页面尺寸、各机型配色、JPG / WebP / GIF / TIFF 导入与 EXIF 方向、本地 API 的导入及多机型导出，以及全部 30 个素材的导入 / JSON 恢复 / PNG 和 PDF 输出、PNG 透明度、内部引用安全和机模毫米坐标。浏览器交互与下载检查位于 `output/playwright/`。
+测试覆盖154 种形象 / 参考轮廓 / 原 CLI，以及布局与 SVG 导入验证、孔位透明裁剪、PDF 毫米尺寸 / 双图层 / CutContour 专色 / 刀线打印关闭、PNG 像素与 DPI、新 CLI 的实际文件输出、Agent 创作 / 编辑 / 批处理 / stdin 管道 / 失败不落盘 / 整机预览，四款 Pro 的六孔裁剪和页面尺寸、各机型配色、JPG / WebP / GIF / TIFF 导入与 EXIF 方向、本地 API 的导入及多机型导出，以及全部 30 个素材的导入 / JSON 恢复 / PNG 和 PDF 输出、PNG 透明度、内部引用安全和机模毫米坐标。浏览器交互与下载检查位于 `output/playwright/`。
 
 PDF 矢量转换使用 [PDFKit](https://pdfkit.org/docs/vector.html) 和 [SVG-to-PDFKit](https://github.com/alafr/SVG-to-PDFKit)。
+
+界面右上角可切换中文 / English，选择会在浏览器记忆；说明文字收在 ⓘ 中，支持鼠标悬停、键盘聚焦和手机点击。语言只影响界面，不改写保存的布局、用户命名或尺寸数据。

@@ -1,0 +1,50 @@
+[
+  {
+    "id": "sparkle",
+    "name": "四角星",
+    "left": 741,
+    "top": 41,
+    "width": 124,
+    "height": 124
+  },
+  {
+    "id": "clover",
+    "name": "四叶花",
+    "left": 917,
+    "top": 47,
+    "width": 118,
+    "height": 113
+  },
+  {
+    "id": "heart",
+    "name": "爱心",
+    "left": 221,
+    "top": 222,
+    "width": 115,
+    "height": 104
+  },
+  {
+    "id": "flower",
+    "name": "六瓣花",
+    "left": 395,
+    "top": 217,
+    "width": 123,
+    "height": 119
+  },
+  {
+    "id": "pentagon",
+    "name": "五边形",
+    "left": 407,
+    "top": 399,
+    "width": 112,
+    "height": 109
+  },
+  {
+    "id": "star",
+    "name": "六角星",
+    "left": 567,
+    "top": 390,
+    "width": 125,
+    "height": 120
+  }
+]

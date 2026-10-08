@@ -4,10 +4,10 @@ import PDFDocument from '../node_modules/pdfkit/js/pdfkit.standalone.js';
 import SVGtoPDF from 'svg-to-pdfkit';
 import {DOMParser,XMLSerializer} from '@xmldom/xmldom';
 import {normalizeDesign,assetSVG,objectHeight} from '../dist/src/design.js';
-import {PLATEAU} from '../dist/src/plateau.js';
+import {getPlateau} from '../dist/src/phones.js';
 export const XML={DOMParser,XMLSerializer};
 export async function exportPrintAndCut(input){
-  const design=normalizeDesign(input,XML),{width:w,height:h,margin:m,path}=PLATEAU,mm=72/25.4;
+  const design=normalizeDesign(input,XML),plateau=getPlateau(design),{width:w,height:h,margin:m,path}=plateau,mm=72/25.4;
   const doc=new PDFDocument({size:[(w+2*m)*mm,(h+2*m)*mm],margin:0,pdfVersion:'1.5',compress:true,info:{Title:design.name,Author:'Template Plus',Subject:'1:1 millimeters; transparent artwork (vectors and embedded PNGs); nominal CutContour; 2 mm page margins'}});
   const chunks=[];
   const result=new Promise((resolve,reject)=>{doc.on('data',b=>chunks.push(b));doc.on('end',()=>resolve(Buffer.concat(chunks)));doc.on('error',reject);});
@@ -43,8 +43,8 @@ export async function exportPrintAndCut(input){
   const overprint=doc.ref({Type:'ExtGState',OP:true,op:true,OPM:1});overprint.end();
   doc.page.ext_gstates.CutOverprint=overprint;
   doc.save().translate(m*mm,m*mm).scale(mm).addContent('/CutOverprint gs');
-  doc.strokeColor('CutContour').lineWidth(.1).path(PLATEAU.outer).stroke();
-  for(const [,x,y,d] of PLATEAU.holes)doc.circle(x,y,d/2).stroke();
+  doc.strokeColor('CutContour').lineWidth(.1).path(plateau.outer).stroke();
+  for(const [,x,y,d] of plateau.holes)doc.circle(x,y,d/2).stroke();
   doc.restore().addContent('EMC');doc.end();
   return result;
 }

@@ -1,6 +1,6 @@
 # 小小形象 · Little Shape Studio
 
-根据两张参考截图制作的可复用形象模板：8 种轮廓 × 11 种颜色，白色眼睛位置固定，支持人类通过 GUI 编辑，也支持 Agent 通过 CLI 生成相同图形。
+根据两张参考截图制作的可复用形象模板：14 种轮廓 × 11 种颜色，白色眼睛位置固定，支持人类通过 GUI 编辑，也支持 Agent 通过 CLI 生成相同图形。
 
 ## 打开编辑器
 
@@ -17,7 +17,7 @@ npm start
 
 点击图案和颜色即时预览。可以调整导出尺寸、画布留白与透明/白色背景，导出 SVG、PNG 和 WebP。棋盘格按钮只影响预览底色，文件背景由“画布背景”决定。SVG 不包含预览界面的选中边框。
 
-“查看 88 种组合”展示完整组合，点选即可返回编辑器。“保存配置”导出 `avatar.json`，“导入配置”恢复形象。配置同时保存在浏览器本地，下次打开可接着创作；“重置”恢复棕色水滴。
+“查看 154 种组合”展示完整组合，点选即可返回编辑器。“保存配置”导出 `avatar.json`，“导入配置”恢复形象。配置同时保存在浏览器本地，下次打开可接着创作；“重置”恢复棕色水滴。
 
 ## 命令行 / Agent
 
@@ -38,7 +38,7 @@ node cli.mjs render --config examples/avatar.json --out output/avatar.png --json
 # 将 SVG 写入 stdout，适合管道操作
 node cli.mjs render --shape hexagon --color blue --out - --format svg
 
-# 一次导出所有 88 种组合，共 176 个图片文件及 manifest.json
+# 一次导出所有 154 种组合，共 308 个图片文件及 manifest.json
 node cli.mjs batch --out output/all --formats svg,png --size 512 --json
 ```
 
@@ -46,7 +46,7 @@ node cli.mjs batch --out output/all --formats svg,png --size 512 --json
 
 ## 图案与颜色
 
-图案顺序对应图一；水滴的最终轮廓与眼睛取自图二。
+原有图案与水滴眼睛保留；新增 6 种轮廓来自 2026-10-08 的形状截图。
 
 | ID | 图案 | ID | 图案 |
 |---|---|---|---|
@@ -54,6 +54,9 @@ node cli.mjs batch --out output/all --formats svg,png --size 512 --json
 | oval | 椭圆 | hexagon | 六边形 |
 | square | 圆角方形 | cloud | 云朵 |
 | capsule | 胶囊 | drop | 水滴 |
+| sparkle | 四角星 | clover | 四叶花 |
+| heart | 爱心 | flower | 六瓣花 |
+| pentagon | 五边形 | star | 六角星 |
 
 | ID | 颜色 | sRGB |
 |---|---|---|
@@ -118,6 +121,6 @@ npm ci
 npm test
 ```
 
-验证参考掩码的轮廓重合度、全部 88 种组合的纯白眼睛、轮廓内位置、透明角像素、配置边界，以及 CLI 配置读取、SVG/PNG/WebP 实际文件、批量清单和错误退出码。实际 GUI 点击、配置恢复与下载检查的截图及文件保存于 `output/playwright/`。
+验证参考掩码的轮廓重合度、全部 154 种组合的纯白眼睛、轮廓内位置、透明角像素、配置边界，以及 CLI 配置读取、SVG/PNG/WebP 实际文件、批量清单和错误退出码。实际 GUI 点击、配置恢复与下载检查的截图及文件保存于 `output/playwright/`。
 
 本次在原截图分辨率下，8 种主体与提取掩码的交并比为 99.54%–99.90%，眼睛为 98.16%。详情见 `output/reference-fidelity.json`；这些数据衡量截图轮廓重建，不代表与不可用的原始设计矢量文件完全相同。

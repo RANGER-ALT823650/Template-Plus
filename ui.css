@@ -1,0 +1,44 @@
+/* Shared compact chrome and accessible hover / focus / touch help. */
+[hidden]{display:none!important}
+.header-actions{display:flex;gap:10px;align-items:center;margin-left:auto}
+.language-toggle{border:1px solid #d8dfce;background:transparent;color:#536348;border-radius:8px;min-width:48px;min-height:34px;padding:6px 10px;font-size:12px;font-weight:600}
+.language-toggle:hover{background:#edf1e7}
+.help{display:inline-flex!important;align-items:center;justify-content:center;width:28px;min-width:28px;height:28px;padding:0!important;border:0!important;border-radius:50%;background:transparent!important;color:#849076!important;font-size:16px!important;cursor:help;line-height:1}
+.help:hover,.help:focus-visible{color:#3f5435!important;background:#eef2e8!important}
+.icon-control{display:inline-flex;align-items:center;justify-content:center;min-width:34px;min-height:34px;font-size:16px;padding:5px 8px}
+.ui-tooltip{position:fixed;inset:auto;margin:0;max-width:min(320px,calc(100vw - 16px));padding:12px 15px;border:1px solid #dce3d3;border-radius:10px;background:#fff;color:#46543e;font:12px/1.7 -apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif;box-shadow:0 6px 24px #2335141a;z-index:1000;overflow-wrap:anywhere}
+header,.topbar{height:76px;padding:0 4%;gap:28px}
+header nav,.topbar nav{display:flex;gap:24px;font-size:12px}
+header nav a,.topbar nav a{padding:25px 0;color:#849076;border-bottom:2px solid transparent}
+header nav a.current,.topbar nav a.current{color:#435639;border-bottom-color:#657953}
+main{padding-top:26px}
+.intro{align-items:center;margin-bottom:22px;gap:16px}
+h1{font-size:24px!important;font-weight:600;letter-spacing:0;margin:0!important}
+.intro-meta{display:flex;align-items:center;gap:4px}
+.intro-meta label{margin:0;font-size:11px}.intro-meta select{margin:0;min-width:166px}
+.section-title{gap:7px}.section-title h2{font-size:13px;font-weight:600;flex:1}.section-title .help{margin-right:-5px}
+.library,.inspector{padding:21px 18px}.divider{margin:20px 0}
+.shapes button span,.shape-button span{display:none}.shapes button{padding:5px 1px}.shapes svg{width:36px;height:36px}
+.shapes{gap:5px}.colors{margin:14px 0 18px}.import-actions{margin-top:8px}
+.library-filter{margin-top:14px;margin-bottom:12px}.library-filter select{margin:0}
+.asset-card span,.asset-card small{display:none}.asset-card img{height:78px}.asset-library{gap:8px}
+.canvas-bottom{padding:10px 18px}.canvas-caption{letter-spacing:0;font-size:10px}
+.layer-heading{align-items:center;padding:10px 20px}.layer-heading h2{font-size:12px;font-weight:600}
+.layer-actions{gap:8px;padding:10px 18px;margin-top:8px}.layer-actions button{font-size:19px;width:34px;height:32px;padding:0;border-radius:6px}.layer-actions button:hover{background:#eef2e7}
+.mockup-heading{gap:6px}.mockup-heading h2{font-size:12px}.mockup-heading label{margin-left:auto}.mockup-heading select{width:110px}.mockup-heading .help{margin-right:auto}
+.mockup-heading .icon-control{padding:4px}
+.size-info{display:flex;justify-content:flex-end;margin-top:-8px;margin-bottom:7px}
+.inspector label{font-size:11px}.inspector .pair button{font-size:11px;min-height:36px}
+.export-pdf{margin-bottom:8px}.save-row{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:14px}.save-status{font-size:10px;text-align:right}.save-row .text{font-size:11px;padding:5px 0}
+.topbar .brand{letter-spacing:0}.topbar nav{margin-right:auto}.collection-link{font-size:12px;text-align:right}
+.shape-grid{gap:6px}.shape-button{padding:6px 3px}.controls{padding:24px}.preview-panel{min-height:500px}.stage{min-height:310px}.avatar{width:300px}
+#send-to-layout{width:100%;margin-top:12px}.agent-more summary{cursor:pointer;font-size:12px}
+@media(min-width:1500px){main{padding-top:30px}.library,.inspector{padding:23px}.preview-panel{min-height:550px}}
+@media(max-width:1000px){header,.topbar{gap:18px}.mockup-heading{row-gap:8px}}
+@media(max-width:900px){.intro{flex-direction:row;align-items:center}.intro-meta{text-align:right}.inspector .pair{max-width:none}}
+@media(max-width:600px){header,.topbar{height:auto;min-height:72px;padding:14px 5%;gap:14px;flex-wrap:wrap}.brand,.topbar .brand{font-size:17px}.brand-icon,.brand-mark{width:30px;height:30px}header nav,.topbar nav{gap:16px;font-size:11px}header nav a,.topbar nav a{padding:7px 0}.header-actions{gap:5px}.language-toggle{min-width:42px}.intro{align-items:flex-start;gap:14px;flex-wrap:wrap}h1{font-size:21px!important}.intro-meta{margin-left:auto}.intro-meta label>span{display:none}.intro-meta select{min-width:155px;font-size:11px}.shapes{grid-template-columns:repeat(7,minmax(0,1fr))}.asset-library{grid-template-columns:repeat(4,minmax(0,1fr));max-height:300px}.asset-card img{height:68px}.canvas-caption{font-size:9px}.mockup-heading label{margin-left:auto}.preview-panel{min-height:420px}.stage{min-height:280px}.topbar nav{margin-right:0}.gallery-grid{grid-template-columns:repeat(6,minmax(0,1fr));min-width:0}.controls{padding:22px}.ui-tooltip{font-size:12px}.shape-button svg{width:40px;height:40px}}
+@media(max-width:380px){header nav,.topbar nav{order:3;width:100%;justify-content:center}.header-actions{margin-left:auto}.intro-meta{margin-left:0}.mockup-heading select{width:95px}}
+.shape-grid{grid-template-columns:repeat(7,minmax(0,1fr))}.shape-button svg{width:40px;height:40px}
+@media(max-width:1000px) and (min-width:761px){.shape-grid{grid-template-columns:repeat(5,minmax(0,1fr))}}
+.shape-button{min-width:0}.shape-button svg{width:100%;max-width:40px}
+@media(max-width:600px){.shape-grid{grid-template-columns:repeat(6,minmax(0,1fr))}}
