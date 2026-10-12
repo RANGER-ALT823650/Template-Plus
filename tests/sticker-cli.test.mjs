@@ -17,7 +17,7 @@ async function temporary(t){const dir=await mkdtemp(join(tmpdir(),'sticker-cli-'
 
 test('Agent discovery, empty creation, all presets and shape recipe interoperability',async t=>{
   const dir=await temporary(t),list=json(['list']);
-  assert.equal(list.models.length,5);assert.equal(list.assets.length,30);assert.equal(list.shapes.length,14);assert.equal(list.colors.length,11);
+  assert.equal(list.models.length,10);assert.equal(list.assets.length,34);assert.equal(list.shapes.length,14);assert.equal(list.colors.length,11);
   const path=join(dir,'layout.json'),recipe=join(dir,'avatar.json');
   assert.equal(json(['create','--model','iphone-18-pro','--out',path]).objects,0);
   await writeFile(recipe,JSON.stringify({shape:'cloud',color:'blue',padding:23,background:'white'}));

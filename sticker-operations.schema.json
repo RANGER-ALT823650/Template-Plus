@@ -27,17 +27,17 @@
           "x": {
             "type": "number",
             "minimum": -100,
-            "maximum": 165
+            "maximum": 500
           },
           "y": {
             "type": "number",
             "minimum": -100,
-            "maximum": 124
+            "maximum": 500
           },
           "width": {
             "type": "number",
             "minimum": 0.5,
-            "maximum": 150
+            "maximum": 1000
           },
           "rotation": {
             "type": "number",
@@ -168,6 +168,11 @@
               "white"
             ],
             "default": "transparent"
+          },
+          "generationRequest": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Path to an image generation request; requires a local image file."
           }
         },
         "allOf": [
@@ -275,7 +280,12 @@
               ]
             }
           }
-        ]
+        ],
+        "dependentRequired": {
+          "generationRequest": [
+            "file"
+          ]
+        }
       },
       {
         "type": "object",
@@ -299,17 +309,17 @@
           "x": {
             "type": "number",
             "minimum": -100,
-            "maximum": 165
+            "maximum": 500
           },
           "y": {
             "type": "number",
             "minimum": -100,
-            "maximum": 124
+            "maximum": 500
           },
           "width": {
             "type": "number",
             "minimum": 0.5,
-            "maximum": 150
+            "maximum": 1000
           },
           "rotation": {
             "type": "number",
@@ -440,6 +450,11 @@
               "white"
             ],
             "default": "transparent"
+          },
+          "generationRequest": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Path to an image generation request; requires a local image file."
           }
         },
         "allOf": [
@@ -547,7 +562,12 @@
               ]
             }
           }
-        ]
+        ],
+        "dependentRequired": {
+          "generationRequest": [
+            "file"
+          ]
+        }
       },
       {
         "type": "object",
@@ -592,17 +612,17 @@
           "x": {
             "type": "number",
             "minimum": -100,
-            "maximum": 165
+            "maximum": 500
           },
           "y": {
             "type": "number",
             "minimum": -100,
-            "maximum": 124
+            "maximum": 500
           },
           "width": {
             "type": "number",
             "minimum": 0.5,
-            "maximum": 150
+            "maximum": 1000
           },
           "rotation": {
             "type": "number",
@@ -717,7 +737,12 @@
               "iphone-17-pro",
               "iphone-17-pro-max",
               "iphone-18-pro",
-              "iphone-18-pro-max"
+              "iphone-18-pro-max",
+              "macbook-air-13",
+              "macbook-air-15",
+              "macbook-pro-14",
+              "macbook-pro-16",
+              "macbook-neo"
             ]
           }
         }
@@ -748,6 +773,41 @@
         "properties": {
           "op": {
             "const": "clear"
+          }
+        }
+      },
+      {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "op"
+        ],
+        "properties": {
+          "op": {
+            "const": "avoid-logo"
+          },
+          "ids": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "pattern": "^[\\w-]{1,80}$"
+            }
+          },
+          "clearance": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 50
+          },
+          "edgeClearance": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 50
+          },
+          "holeClearance": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 50
           }
         }
       }

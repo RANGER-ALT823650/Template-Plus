@@ -1,10 +1,28 @@
-import {normalizeConfig,renderSVG} from './avatar.js?v=20261008-shapes';
+import {SHAPES,COLORS,normalizeConfig,renderSVG} from './avatar.js?v=20261008-shapes';
 import {getPhone,getPlateau} from './phones.js';
 import {importSVG} from './svg-import.js';
 import {importPNG,MAX_LAYOUT_BYTES} from './png-import.js';
+import {generationMetadata} from './generation.js';
 export const DEFAULT_DESIGN={version:1,model:'iphone-air',name:'我的贴纸',objects:[
   {id:'first',name:'棕色水滴',type:'avatar',config:normalizeConfig({padding:0}),x:32,y:11.76,width:12,rotation:-12},
 ]};
+// Shared GUI/CLI bounds also allow full-size MacBook lid layouts.
+export const OBJECT_LIMITS={x:500,y:500,width:1000};
+// Only new content scales to a laptop lid; saved and explicitly sized objects
+// retain their millimetres. Use one uniform factor to preserve asset proportions.
+export function initialObjectWidth(model,width=12){
+  const target=getPhone(model),air=getPhone('iphone-air').plateau,p=target.plateau;
+  return width*(target.family==='macbook'?Math.min(p.width/air.width,p.height/air.height):1);
+}
+export function presetObjects(model,characters,makeId=(_,i)=>`preset-${i+1}`){
+  const p=getPhone(model).plateau,air=getPhone('iphone-air').plateau;
+  return characters.map((c,i)=>({
+    id:makeId(c,i),name:COLORS.find(o=>o.id===c.color).name+SHAPES.find(o=>o.id===c.shape).name,type:'avatar',
+    config:normalizeConfig({shape:c.shape,color:c.color,padding:0,size:200}),
+    x:c.center_mm[0]*p.width/air.width,y:c.center_mm[1]*p.height/air.height,
+    width:initialObjectWidth(model,c.canvas_size_mm),rotation:c.angle_degrees,
+  }));
+}
 const finite=(value,min,max,label)=>{if(!Number.isFinite(value)||value<min||value>max)throw new Error(`${label}须在 ${min}–${max} 之间`);return value;};
 export function normalizeDesign(input,xml=globalThis){
   if(!input || input.version!==1 || !Array.isArray(input.objects) || input.objects.length>100)throw new Error('布局须为 version 1，最多 100 个形象');
@@ -16,7 +34,8 @@ export function normalizeDesign(input,xml=globalThis){
     if(!o || typeof o.id!=='string'|| !/^[\w-]{1,80}$/.test(o.id)||ids.has(o.id))throw new Error('形象 ID 无效或重复');ids.add(o.id);
     if(!['avatar','svg','png'].includes(o.type)||typeof o.name!=='string'||o.name.length>100)throw new Error('形象类型或名称无效');
     const asset=o.type==='avatar'?{config:normalizeConfig(o.config)}:o.type==='png'?importPNG(o.dataUrl):importSVG(o.svg,xml);
-    return {id:o.id,name:o.name,type:o.type,...asset,x:finite(o.x,-100,165,'X 坐标'),y:finite(o.y,-100,124,'Y 坐标'),width:finite(o.width,.5,150,'宽度'),rotation:finite(o.rotation,-360,360,'旋转角度')};
+    if(o.generation!==undefined&&o.type!=='png')throw new Error('生成信息仅适用于图片素材');
+    return {id:o.id,name:o.name,type:o.type,...asset,...(o.generation===undefined?{}:{generation:generationMetadata(o.generation)}),x:finite(o.x,-100,OBJECT_LIMITS.x,'X 坐标'),y:finite(o.y,-100,OBJECT_LIMITS.y,'Y 坐标'),width:finite(o.width,.5,OBJECT_LIMITS.width,'宽度'),rotation:finite(o.rotation,-360,360,'旋转角度')};
   })};
 }
 export function assetSVG(o){

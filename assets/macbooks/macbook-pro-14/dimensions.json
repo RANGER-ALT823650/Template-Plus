@@ -1,0 +1,68 @@
+{
+  "model": "macbook-pro-14",
+  "name": "MacBook Pro 14″",
+  "source_url": "https://www.apple.com.cn/macbook-pro/specs/",
+  "checked_on": "2026-10-10",
+  "official_enclosure_mm": {
+    "width": 312.6,
+    "depth": 221.2,
+    "height": 15.5
+  },
+  "sticker_surface": "closed display lid, top view; origin at upper left; logo has no cutout",
+  "outline": {
+    "width": 312.6,
+    "height": 221.2,
+    "corner": {
+      "kind": "photo-fitted-continuous-profile",
+      "equivalentRadiusMm": 9.22,
+      "spanMm": 16.214,
+      "exponent": 3.8225,
+      "fitRmsMm": 0.145
+    },
+    "path": "M 1.87985 3.66375 L 2.26464 3.15456 L 2.68895 2.68895 L 3.15456 2.26464 L 3.66375 1.87985 L 4.21949 1.53319 L 4.82568 1.22354 L 5.48763 0.95004 L 6.02500 0.76821 L 6.80408 0.55636 L 7.44313 0.42017 L 8.38527 0.26855 L 9.17800 0.17714 L 10.07135 0.10475 L 11.11145 0.05131 L 13.56214 0.00419 L 299.03787 0.00419 L 301.09448 0.03769 L 302.52866 0.10475 L 303.95987 0.23596 L 305.15686 0.42017 L 306.19504 0.65794 L 306.75830 0.82662 L 307.28345 1.01507 L 307.61432 1.15181 L 308.08401 1.37380 L 308.52402 1.61634 L 308.93625 1.87985 L 309.44543 2.26464 L 309.91104 2.68895 L 310.33536 3.15456 L 310.72015 3.66375 L 311.06680 4.21949 L 311.37646 4.82568 L 311.64996 5.48763 L 311.83179 6.02500 L 312.04364 6.80408 L 312.17984 7.44313 L 312.33145 8.38527 L 312.42285 9.17800 L 312.49524 10.07135 L 312.54871 11.11145 L 312.59583 13.56214 L 312.59058 208.26419 L 312.54871 210.08855 L 312.47324 211.43982 L 312.33145 212.81473 L 312.13657 213.97566 L 312.04364 214.39592 L 311.88803 214.98730 L 311.77338 215.35829 L 311.58493 215.88344 L 311.44818 216.21431 L 311.22620 216.68402 L 310.98364 217.12401 L 310.72015 217.53624 L 310.33536 218.04544 L 309.91104 218.51105 L 309.44543 218.93536 L 308.93625 219.32014 L 308.38052 219.66681 L 307.77432 219.97646 L 307.11237 220.24995 L 306.57501 220.43179 L 305.79593 220.64365 L 305.15686 220.77983 L 304.21472 220.93146 L 303.42200 221.02286 L 302.52866 221.09525 L 301.48856 221.14870 L 299.03787 221.19582 L 13.56214 221.19582 L 11.50551 221.16231 L 10.07135 221.09525 L 8.64014 220.96404 L 7.44313 220.77983 L 6.40496 220.54207 L 5.84171 220.37338 L 5.31656 220.18494 L 4.98570 220.04819 L 4.51598 219.82620 L 4.07599 219.58365 L 3.66375 219.32014 L 3.15456 218.93536 L 2.68895 218.51105 L 2.26464 218.04544 L 1.87985 217.53624 L 1.53319 216.98051 L 1.22354 216.37431 L 0.95004 215.71237 L 0.76821 215.17500 L 0.55636 214.39592 L 0.42017 213.75687 L 0.26855 212.81473 L 0.17714 212.02200 L 0.10475 211.12865 L 0.05131 210.08855 L 0.00419 207.63786 L 0.00942 12.93580 L 0.05131 11.11145 L 0.12678 9.76019 L 0.26855 8.38527 L 0.46342 7.22434 L 0.55636 6.80408 L 0.71198 6.21269 L 0.82662 5.84171 L 1.01507 5.31656 L 1.15181 4.98570 L 1.37380 4.51598 L 1.61634 4.07599 Z",
+    "holes": []
+  },
+  "logo_bounds_mm": {
+    "x": 137.9,
+    "y": 84.064,
+    "width": 37.574,
+    "height": 46.099
+  },
+  "calibration_source": {
+    "specs_url": "https://www.apple.com.cn/macbook-pro/specs/",
+    "image_url": "https://www.apple.com.cn/v/macbook-pro/specs/d/images/specs/14-inch/dimensions_1_14_inch__da8sc3fnv0cy_large_2x.jpg",
+    "local_file": "assets/macbooks/sources/macbook-pro-14-official-top.jpg",
+    "sha256": "f616b65191e3c598e6a8da966ef30770673baef9d60d60b63995b8ba9dadeaf2",
+    "alt": "呈闭合状态的 14 英寸 MacBook Pro 的外观图，展示位于机身中央的 Apple 标志。",
+    "body_bbox_px": [
+      5,
+      2,
+      808,
+      572
+    ],
+    "logo_bbox_px": [
+      361,
+      219,
+      97,
+      119
+    ],
+    "method": "Top-view image segmentation; scale X/Y by published enclosure width/depth. Outline fits four corners symmetrically. Logo includes leaf. About 0.5-1 mm image estimation uncertainty; not official logo/radius dimensions."
+  },
+  "method": "Published enclosure width/depth define the nominal lid footprint. Logo bounds include the leaf. Corners and logo are derived from retained official Apple top-view images, or the Neo engineering vectors. The equivalent radius describes the corner near its diagonal, not a constant circular radius. Photo estimates have about 0.5-1 mm uncertainty; logo/radius values are not dimension callouts. Edge treatment and RGB colors remain illustrative; verify a paper template before cutting.",
+  "colors": [
+    {
+      "id": "spaceblack",
+      "name": "深空黑色",
+      "body": "#343537",
+      "panel": "#58595C",
+      "metal": "#202123"
+    },
+    {
+      "id": "silver",
+      "name": "银色",
+      "body": "#D6D8DA",
+      "panel": "#F0F1F2",
+      "metal": "#A3A6AA"
+    }
+  ]
+}

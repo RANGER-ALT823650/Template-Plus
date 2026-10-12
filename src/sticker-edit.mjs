@@ -2,21 +2,25 @@ import {readFile,stat} from 'node:fs/promises';
 import {basename,extname,resolve} from 'node:path';
 import {randomUUID} from 'node:crypto';
 import {SHAPES,COLORS,normalizeConfig} from './avatar.js';
-import {normalizeDesign,objectHeight,changeDesignModel,centerDesignObject,coverDesignObject} from './design.js';
+import {normalizeDesign,OBJECT_LIMITS,initialObjectWidth,objectHeight,changeDesignModel,centerDesignObject,coverDesignObject} from './design.js';
 import {getPhone} from './phones.js';
 import {importSVG} from './svg-import.js';
 import {importImage} from './image-import.mjs';
 import {MAX_PNG_BYTES} from './png-import.js';
 import {XML} from './export-pdf.mjs';
+import {avoidLogo} from './layout-check.js';
+import {readGenerationRequest,generationMetadata} from './generation.js';
+import {assertGeneratedTransparency} from './image-generation.mjs';
 
 export const catalog=JSON.parse(await readFile(new URL('../assets/library/catalog.json',import.meta.url),'utf8'));
 const avatarKeys=['shape','color','size','padding','background'];
 const objectKeys=['name','x','y','width','rotation'];
-const sourceKeys=['asset','file','config',...avatarKeys];
+const sourceKeys=['asset','file','config','generationRequest',...avatarKeys];
 export const OPERATION_FIELDS={
   add:['id',...objectKeys,...sourceKeys],update:['id',...objectKeys,...sourceKeys],
   remove:['id'],duplicate:['id','newId',...objectKeys],front:['id'],back:['id'],
   reorder:['ids'],center:['id'],cover:['id'],model:['model'],rename:['name'],clear:[],
+  'avoid-logo':['ids','clearance','edgeClearance','holeClearance'],
 };
 const own=(o,k)=>Object.hasOwn(o,k);
 function checkFields(o,keys,label){
@@ -33,6 +37,7 @@ async function source(op,baseDir,previous){
   const explicit=['asset','file','config'].filter(k=>own(op,k));
   const overrides=Object.fromEntries(avatarKeys.filter(k=>own(op,k)).map(k=>[k,op[k]]));
   if(explicit.length>1)throw new Error('asset、file、config 只能选择一个素材来源');
+  if(own(op,'generationRequest')&&!own(op,'file'))throw new Error('generationRequest 须与 file 一起使用');
   if(own(op,'config'))checkFields(op.config,['version',...avatarKeys],'形象配置');
   if((own(op,'asset')||own(op,'file'))&&Object.keys(overrides).length)throw new Error('图片 / SVG 素材不能使用形象配置选项');
   if(own(op,'asset')||own(op,'file')){
@@ -45,7 +50,15 @@ async function source(op,baseDir,previous){
     if((await stat(path)).size>(isSVG?200000:MAX_PNG_BYTES))throw new Error(isSVG?'SVG 必须小于 200 KB':'图片最大 5 MB');
     const bytes=await readFile(path);
     const asset=isSVG?importSVG(bytes.toString('utf8'),XML):await importImage(`data:image/${mime};base64,${bytes.toString('base64')}`);
-    return {type:isSVG?'svg':'png',...asset,name:item?.name||basename(op.file)};
+    let generation;
+    if(own(op,'generationRequest')){
+      if(isSVG)throw new Error('生成请求仅适用于图片素材');
+      const requestPath=resolve(baseDir,op.generationRequest);if((await stat(requestPath)).size>32000)throw new Error('生成请求最大 32 KB');
+      const request=readGenerationRequest(JSON.parse(await readFile(requestPath,'utf8')));
+      await assertGeneratedTransparency(asset,request);
+      generation=generationMetadata({version:request.version,prompt:request.prompt,transparentBackground:request.transparentBackground});
+    }
+    return {type:isSVG?'svg':'png',...asset,...(generation?{generation}:{}),name:item?.name||basename(op.file)};
   }
   if(previous&&previous.type!=='avatar'&&!own(op,'config')){
     if(Object.keys(overrides).length)throw new Error('只有模板形象支持 shape / color 等配置；替换素材请使用 asset、file 或 config');
@@ -66,7 +79,7 @@ export async function applyOperations(input,operations,{baseDir=process.cwd()}={
       checkFields(op,['op',...fields],'操作');
       if(op.op==='add'){
         const asset=await source(op,baseDir),p=getPhone(design.model).plateau;
-        design.objects.push({id:own(op,'id')?op.id:randomUUID(),...asset,x:p.width/2,y:p.height/2,width:12,rotation:0,...Object.fromEntries(objectKeys.filter(k=>own(op,k)).map(k=>[k,op[k]]))});
+        design.objects.push({id:own(op,'id')?op.id:randomUUID(),...asset,x:p.width/2,y:p.height/2,width:initialObjectWidth(design.model),rotation:0,...Object.fromEntries(objectKeys.filter(k=>own(op,k)).map(k=>[k,op[k]]))});
       }else if(op.op==='update'){
         const o=target(design,op.id),patch=Object.fromEntries(objectKeys.filter(k=>own(op,k)).map(k=>[k,op[k]]));
         if(sourceKeys.some(k=>own(op,k))){
@@ -77,7 +90,7 @@ export async function applyOperations(input,operations,{baseDir=process.cwd()}={
         target(design,op.id);design.objects=design.objects.filter(o=>o.id!==op.id);
       }else if(op.op==='duplicate'){
         const o=target(design,op.id);
-        design.objects.push({...o,id:own(op,'newId')?op.newId:randomUUID(),name:o.name+' 副本',x:Math.min(165,o.x+1.5),y:Math.min(124,o.y+1.5),...Object.fromEntries(objectKeys.filter(k=>own(op,k)).map(k=>[k,op[k]]))});
+        design.objects.push({...o,id:own(op,'newId')?op.newId:randomUUID(),name:o.name+' 副本',x:Math.min(OBJECT_LIMITS.x,o.x+1.5),y:Math.min(OBJECT_LIMITS.y,o.y+1.5),...Object.fromEntries(objectKeys.filter(k=>own(op,k)).map(k=>[k,op[k]]))});
       }else if(['front','back'].includes(op.op)){
         const o=target(design,op.id);design.objects=design.objects.filter(item=>item.id!==o.id);
         design.objects[op.op==='front'?'push':'unshift'](o);
@@ -86,6 +99,11 @@ export async function applyOperations(input,operations,{baseDir=process.cwd()}={
         design.objects=op.ids.map(id=>target(design,id));
       }else if(op.op==='center')centerDesignObject(design,target(design,op.id));
       else if(op.op==='cover')coverDesignObject(design,target(design,op.id));
+      else if(op.op==='avoid-logo'){
+        const {op:_,...settings}=op,result=avoidLogo(design,settings);
+        if(result.unresolved.length)throw new Error(`无法在当前尺寸与间距下避让 Logo：${result.unresolved.join(', ')}；请减小图案或调整布局`);
+        design=result.design;
+      }
       else if(op.op==='model'){
         if(typeof op.model!=='string')throw new Error('model 操作须指定机型');
         changeDesignModel(design,op.model);

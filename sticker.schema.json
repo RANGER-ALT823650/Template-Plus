@@ -19,7 +19,12 @@
         "iphone-17-pro",
         "iphone-17-pro-max",
         "iphone-18-pro",
-        "iphone-18-pro-max"
+        "iphone-18-pro-max",
+        "macbook-air-13",
+        "macbook-air-15",
+        "macbook-pro-14",
+        "macbook-pro-16",
+        "macbook-neo"
       ],
       "default": "iphone-air"
     },
@@ -61,17 +66,17 @@
               "x": {
                 "type": "number",
                 "minimum": -100,
-                "maximum": 165
+                "maximum": 500
               },
               "y": {
                 "type": "number",
                 "minimum": -100,
-                "maximum": 124
+                "maximum": 500
               },
               "width": {
                 "type": "number",
                 "minimum": 0.5,
-                "maximum": 150
+                "maximum": 1000
               },
               "rotation": {
                 "type": "number",
@@ -172,17 +177,17 @@
               "x": {
                 "type": "number",
                 "minimum": -100,
-                "maximum": 165
+                "maximum": 500
               },
               "y": {
                 "type": "number",
                 "minimum": -100,
-                "maximum": 124
+                "maximum": 500
               },
               "width": {
                 "type": "number",
                 "minimum": 0.5,
-                "maximum": 150
+                "maximum": 1000
               },
               "rotation": {
                 "type": "number",
@@ -227,17 +232,17 @@
               "x": {
                 "type": "number",
                 "minimum": -100,
-                "maximum": 165
+                "maximum": 500
               },
               "y": {
                 "type": "number",
                 "minimum": -100,
-                "maximum": 124
+                "maximum": 500
               },
               "width": {
                 "type": "number",
                 "minimum": 0.5,
-                "maximum": 150
+                "maximum": 1000
               },
               "rotation": {
                 "type": "number",
@@ -261,6 +266,28 @@
                 "type": "integer",
                 "minimum": 1,
                 "maximum": 8192
+              },
+              "generation": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "version",
+                  "prompt",
+                  "transparentBackground"
+                ],
+                "properties": {
+                  "version": {
+                    "const": 1
+                  },
+                  "prompt": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 4000
+                  },
+                  "transparentBackground": {
+                    "type": "boolean"
+                  }
+                }
               }
             }
           }

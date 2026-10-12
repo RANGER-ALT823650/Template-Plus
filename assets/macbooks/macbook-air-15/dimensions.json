@@ -1,0 +1,82 @@
+{
+  "model": "macbook-air-15",
+  "name": "MacBook Air 15″",
+  "source_url": "https://www.apple.com.cn/macbook-air/specs/",
+  "checked_on": "2026-10-10",
+  "official_enclosure_mm": {
+    "width": 340.4,
+    "depth": 237.6,
+    "height": 11.5
+  },
+  "sticker_surface": "closed display lid, top view; origin at upper left; logo has no cutout",
+  "outline": {
+    "width": 340.4,
+    "height": 237.6,
+    "corner": {
+      "kind": "photo-fitted-continuous-profile",
+      "equivalentRadiusMm": 10.87,
+      "spanMm": 18.232,
+      "exponent": 3.6842,
+      "fitRmsMm": 0.13
+    },
+    "path": "M 2.18827 4.25490 L 2.63491 3.66607 L 3.12688 3.12688 L 3.66607 2.63491 L 4.25490 2.18827 L 4.89653 1.78550 L 5.59515 1.42544 L 6.35643 1.10717 L 6.97315 0.89546 L 7.86508 0.64868 L 8.59463 0.48997 L 9.66652 0.31322 L 10.56470 0.20663 L 11.57231 0.12220 L 12.73845 0.05985 L 14.17480 0.01954 L 15.44649 0.00488 L 324.95352 0.00488 L 327.22198 0.04397 L 328.82770 0.12220 L 329.51337 0.17603 L 330.44431 0.27522 L 331.01352 0.35369 L 331.80536 0.48997 L 332.29800 0.59328 L 332.99152 0.76703 L 333.63708 0.96348 L 334.24014 1.18287 L 334.62067 1.34199 L 335.16159 1.60019 L 335.66904 1.88215 L 336.14508 2.18827 L 336.73392 2.63491 L 337.27313 3.12688 L 337.76511 3.66607 L 338.10425 4.10289 L 338.51785 4.73097 L 338.88849 5.41488 L 339.21713 6.15986 L 339.43652 6.76292 L 339.69339 7.63399 L 339.85962 8.34507 L 340.00336 9.11485 L 340.12479 9.95569 L 340.22397 10.88663 L 340.30103 11.93988 L 340.35602 13.17801 L 340.38901 14.76094 L 340.39999 18.23245 L 340.39999 219.36755 L 340.38901 222.83907 L 340.34015 224.86156 L 340.25211 226.37807 L 340.19336 227.03529 L 340.08679 227.93347 L 340.00336 228.48515 L 339.85962 229.25493 L 339.75131 229.73492 L 339.57001 230.41174 L 339.43652 230.83708 L 339.21713 231.44014 L 339.05801 231.82066 L 338.79980 232.36159 L 338.51785 232.86903 L 338.21173 233.34509 L 337.76511 233.93393 L 337.27313 234.47311 L 336.73392 234.96509 L 336.14508 235.41173 L 335.50348 235.81450 L 334.80484 236.17456 L 334.04358 236.49283 L 333.42685 236.70454 L 332.53491 236.95131 L 331.80536 237.11003 L 330.73349 237.28677 L 329.83530 237.39337 L 328.82770 237.47780 L 327.66156 237.54015 L 326.22519 237.58046 L 324.95352 237.59511 L 15.44649 237.59511 L 13.17801 237.55603 L 11.57231 237.47780 L 10.88663 237.42397 L 9.95569 237.32478 L 9.38647 237.24631 L 8.59463 237.11003 L 8.10200 237.00671 L 7.40847 236.83298 L 6.76292 236.63652 L 6.15986 236.41713 L 5.77934 236.25801 L 5.23841 235.99980 L 4.73097 235.71785 L 4.25490 235.41173 L 3.80852 235.08093 L 3.25717 234.60046 L 2.75358 234.07327 L 2.29576 233.49712 L 1.88215 232.86903 L 1.51151 232.18512 L 1.18287 231.44014 L 0.96348 230.83708 L 0.70660 229.96600 L 0.54038 229.25493 L 0.39663 228.48515 L 0.27522 227.64432 L 0.17603 226.71336 L 0.09897 225.66013 L 0.04397 224.42198 L 0.01099 222.83907 L 0.00000 219.36755 L 0.00000 18.23245 L 0.01099 14.76094 L 0.05985 12.73845 L 0.14789 11.22194 L 0.20663 10.56470 L 0.31322 9.66652 L 0.39663 9.11485 L 0.54038 8.34507 L 0.64868 7.86508 L 0.82998 7.18826 L 0.96348 6.76292 L 1.18287 6.15986 L 1.34199 5.77934 L 1.60019 5.23841 L 1.88215 4.73097 Z",
+    "holes": []
+  },
+  "logo_bounds_mm": {
+    "x": 151.917,
+    "y": 91.646,
+    "width": 37.697,
+    "height": 46.766
+  },
+  "calibration_source": {
+    "specs_url": "https://www.apple.com.cn/macbook-air/specs/",
+    "image_url": "https://www.apple.com.cn/v/macbook-air/specs/c/images/specs/15-inch/mba_15_size_top__f0yqeuf0a4y2_large_2x.jpg",
+    "local_file": "assets/macbooks/sources/macbook-air-15-official-top.jpg",
+    "sha256": "9c47ea3b6aeca438dc4ebef711fb115800e7b780032b36544f1c73fbead0df99",
+    "alt": "呈闭合状态的 15 英寸 MacBook Air 的外观图，Apple 标志位于中央。",
+    "body_bbox_px": [
+      2,
+      2,
+      904,
+      631
+    ],
+    "logo_bbox_px": [
+      405,
+      245,
+      100,
+      124
+    ],
+    "method": "Top-view image segmentation; scale X/Y by published enclosure width/depth. Outline fits four corners symmetrically. Logo includes leaf. About 0.5-1 mm image estimation uncertainty; not official logo/radius dimensions."
+  },
+  "method": "Published enclosure width/depth define the nominal lid footprint. Logo bounds include the leaf. Corners and logo are derived from retained official Apple top-view images, or the Neo engineering vectors. The equivalent radius describes the corner near its diagonal, not a constant circular radius. Photo estimates have about 0.5-1 mm uncertainty; logo/radius values are not dimension callouts. Edge treatment and RGB colors remain illustrative; verify a paper template before cutting.",
+  "colors": [
+    {
+      "id": "skyblue",
+      "name": "天蓝色",
+      "body": "#C8D7E1",
+      "panel": "#E5EDF2",
+      "metal": "#97ABB9"
+    },
+    {
+      "id": "silver",
+      "name": "银色",
+      "body": "#D6D8DA",
+      "panel": "#F0F1F2",
+      "metal": "#A3A6AA"
+    },
+    {
+      "id": "starlight",
+      "name": "星光色",
+      "body": "#E3D9C8",
+      "panel": "#F4EEE3",
+      "metal": "#BAAD96"
+    },
+    {
+      "id": "midnight",
+      "name": "午夜色",
+      "body": "#303C4B",
+      "panel": "#536173",
+      "metal": "#1B2634"
+    }
+  ]
+}

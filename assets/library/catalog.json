@@ -238,5 +238,37 @@
     "type": "svg",
     "name": "OpenAI",
     "file": "/assets/library/ai-logos-svg/08-openai.svg"
+  },
+  {
+    "id": "ai-logos-png-09-ghost",
+    "group": "ai-logos-svg",
+    "label": "AI Logo · PNG",
+    "type": "png",
+    "name": "白色幽灵",
+    "file": "/assets/library/ai-logos-png/09-ghost.png"
+  },
+  {
+    "id": "ai-logos-png-10-pixel",
+    "group": "ai-logos-svg",
+    "label": "AI Logo · PNG",
+    "type": "png",
+    "name": "橙色像素小怪兽",
+    "file": "/assets/library/ai-logos-png/10-pixel.png"
+  },
+  {
+    "id": "ai-logos-png-11-obsidian",
+    "group": "ai-logos-svg",
+    "label": "AI Logo · PNG",
+    "type": "png",
+    "name": "Obsidian",
+    "file": "/assets/library/ai-logos-png/11-obsidian.png"
+  },
+  {
+    "id": "ai-logos-png-12-blue-wave",
+    "group": "ai-logos-svg",
+    "label": "AI Logo · PNG",
+    "type": "png",
+    "name": "蓝色波浪",
+    "file": "/assets/library/ai-logos-png/12-blue-wave.png"
   }
 ]

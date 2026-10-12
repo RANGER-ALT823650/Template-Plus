@@ -32,13 +32,28 @@ test('PNG exports clip transparent exterior and all three holes; PDF embeds imag
  const oc=pdf.catalog.lookup(PDFName.of('OCProperties'),PDFDict);assert.ok(oc.get(PDFName.of('OCGs')));
  assert.ok(Math.abs(page.getSize().width*25.4/72-(PLATEAU.width+4))<1e-5);
 });
-test('all 30 individual materials import, persist and export through shared renderers',async()=>{
+test('all 34 individual materials import, persist and export through shared renderers',async()=>{
  const catalog=JSON.parse(await readFile('assets/library/catalog.json','utf8'));
- assert.equal(catalog.length,30);assert.equal(catalog.filter(i=>i.group==='muse-png').length,8);assert.equal(catalog.filter(i=>i.group==='muse-svg').length,9);assert.equal(catalog.filter(i=>i.group==='dots-svg').length,5);assert.equal(catalog.filter(i=>i.group==='ai-logos-svg').length,8);
+ assert.equal(catalog.length,34);assert.equal(catalog.filter(i=>i.group==='muse-png').length,8);assert.equal(catalog.filter(i=>i.group==='muse-svg').length,9);assert.equal(catalog.filter(i=>i.group==='dots-svg').length,5);assert.equal(catalog.filter(i=>i.group==='ai-logos-svg').length,12);
  for(const item of catalog){const buffer=await readFile(item.file.slice(1));const asset=item.type==='svg'?importSVG(buffer.toString(),XML):importPNG('data:image/png;base64,'+buffer.toString('base64'));const d=design([object(asset,item.type,item.id)]);
   assert.deepEqual(design(JSON.parse(JSON.stringify(d)).objects),d);
   const {data,info}=await sharp(await exportPNG(d)).ensureAlpha().raw().toBuffer({resolveWithObject:true});assert.ok(data.some((v,i)=>i%info.channels===3&&v>0),item.id+' renders visible content');
   const pdf=await PDFDocument.load(await exportPrintAndCut(d));assert.equal(pdf.getPageCount(),1,item.id);
+ }
+});
+test('added logo cutouts remove exterior backgrounds and preserve opaque black eyes and source colors',async()=>{
+ const cases=[
+  ['09-ghost','jpg',[[145,200],[255,160],[200,300]],[[399,0],[380,380]]],
+  ['10-pixel','png',[[147,147],[252,147],[200,200]],[[0,0],[148,260],[200,270]]],
+  ['11-obsidian','jpg',[[200,200],[200,100]],[[0,0],[399,399]]],
+  ['12-blue-wave','jpg',[[200,200],[100,120]],[[0,0],[399,399]]],
+ ];
+ for(const [key,ext,inside,outside] of cases){
+  const {data,info}=await sharp(`assets/library/ai-logos-png/${key}.png`).ensureAlpha().raw().toBuffer({resolveWithObject:true});
+  const original=await sharp(`references/ai-logos/${key}-original.${ext}`).removeAlpha().raw().toBuffer();
+  assert.equal(info.width,400);assert.equal(info.height,400);
+  for(const [x,y] of outside)assert.equal(data[(y*400+x)*4+3],0,key+' exterior');
+  for(const [x,y] of inside){const p=y*400+x;assert.equal(data[p*4+3],255,key+' opaque detail');assert.deepEqual(data.subarray(p*4,p*4+3),original.subarray(p*3,p*3+3),key+' unchanged source RGB');}
  }
 });
 test('internal gradients and filters work with separate instance IDs while external references stay rejected',()=>{

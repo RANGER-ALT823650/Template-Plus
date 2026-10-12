@@ -1,5 +1,5 @@
 import {importImage} from './src/image-import.mjs';
-import {PHONES,mockupPath} from './src/phones.js';
+import {PHONES,mockupPath,modelAssetDirectory} from './src/phones.js';
 import {MAX_LAYOUT_BYTES} from './src/png-import.js';
 import http from 'node:http';
 import {readFile} from 'node:fs/promises';
@@ -7,12 +7,16 @@ import {exportPNG} from './src/export-png.mjs';
 import {exportPrintAndCut,XML} from './src/export-pdf.mjs';
 import {normalizeDesign,renderDesignSVG} from './src/design.js';
 import {importSVG} from './src/svg-import.js';
+import {readGenerationRequest,generationMetadata} from './src/generation.js';
+import {assertGeneratedTransparency} from './src/image-generation.mjs';
+import {checkLayout} from './src/layout-check.js';
 const args=process.argv.slice(2),portIndex=args.indexOf('--port'),port=portIndex<0?4174:Number(args[portIndex+1]);
 if(!Number.isInteger(port)||port<1||port>65535)throw new Error('Invalid port');
-const files=new Map([['/','index.html'],...['STICKER-CLI.md','sticker.schema.json','sticker-operations.schema.json','index.html','workstation.js','workstation.css','avatar.html','app.js','style.css','src/avatar.js','src/reference-data.js','src/design.js','src/svg-import.js','src/plateau.js','src/png-import.js','src/layout-store.js','src/mockup.js','src/phones.js','src/pro-geometry.js','assets/library/catalog.json','assets/iphone-air/placements.json','assets/iphone-air/iphone-air-plateau-cutout.svg','assets/iphone-air/dimensions.json'].map(f=>['/'+f,f])]);
+const files=new Map([['/','index.html'],...['STICKER-CLI.md','sticker.schema.json','sticker-operations.schema.json','index.html','workstation.js','workstation.css','ui.css','avatar.html','app.js','style.css','src/avatar.js','src/i18n.js','src/additional-shapes.js','src/reference-data.js','src/design.js','src/svg-import.js','src/plateau.js','src/png-import.js','src/layout-store.js','src/mockup.js','src/phones.js','src/pro-geometry.js','src/macbooks.js','src/macbook-geometry.js','assets/library/catalog.json','assets/iphone-air/placements.json','assets/iphone-air/iphone-air-plateau-cutout.svg','assets/iphone-air/dimensions.json'].map(f=>['/'+f,f])]);
+for(const file of ['src/layout-check.js','src/generation.js'])files.set('/'+file,file);
 const catalog=JSON.parse(await readFile(new URL('assets/library/catalog.json',import.meta.url),'utf8'));
 for(const item of catalog)files.set(item.file,item.file.slice(1));
-for(const phone of PHONES){for(const color of phone.colors){const path=mockupPath(phone.id,color.id);files.set(path,path.slice(1));}if(phone.id!=='iphone-air')for(const file of ['dimensions.json','plateau-cutout.svg'])files.set(`/assets/phones/${phone.id}/${file}`,`assets/phones/${phone.id}/${file}`);}
+for(const phone of PHONES){for(const color of phone.colors){const path=mockupPath(phone.id,color.id);files.set(path,path.slice(1));}if(phone.id!=='iphone-air')for(const file of ['dimensions.json','plateau-cutout.svg'])files.set(`${modelAssetDirectory(phone.id)}/${file}`,`${modelAssetDirectory(phone.id).slice(1)}/${file}`);}
 const mime={md:'text/plain; charset=utf-8',html:'text/html; charset=utf-8',js:'text/javascript; charset=utf-8',css:'text/css; charset=utf-8',json:'application/json; charset=utf-8',svg:'image/svg+xml',png:'image/png'};
 const server=http.createServer(async(req,res)=>{
   const url=new URL(req.url,'http://localhost');
@@ -23,8 +27,14 @@ const server=http.createServer(async(req,res)=>{
       const chunks=[];let length=0;
       for await(const chunk of req){length+=chunk.length;if(length>MAX_LAYOUT_BYTES)throw new Error('布局文件超过 32 MB');chunks.push(chunk);}
       const input=JSON.parse(Buffer.concat(chunks).toString('utf8'));
+      if(url.pathname==='/api/check')return sendJSON(await checkLayout(normalizeDesign(input.design,XML),input.options));
       if(url.pathname==='/api/import-svg')return sendJSON(importSVG(input.svg,XML));
       if(url.pathname==='/api/import-png'||url.pathname==='/api/import-image')return sendJSON(await importImage(input.dataUrl));
+      if(url.pathname==='/api/import-generated'){
+        const request=readGenerationRequest(input.request),asset=await importImage(input.dataUrl);
+        await assertGeneratedTransparency(asset,request);
+        return sendJSON({...asset,generation:generationMetadata({version:1,prompt:request.prompt,transparentBackground:request.transparentBackground})});
+      }
       const design=normalizeDesign(input,XML);
       if(url.pathname==='/api/validate')return sendJSON(design);
       let data,type,filename;

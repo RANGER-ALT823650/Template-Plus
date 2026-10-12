@@ -21,7 +21,7 @@ test('legacy layouts default to Air; selected model round trips and rejects unkn
 });
 test('every model exports its own physical size, transparent exterior and ALL cut holes',async()=>{
  const asset=await importImage(await imageURL('jpeg'));
- for(const p of PHONES){
+ for(const p of PHONES.filter(p=>p.family!=='macbook')){
   const {width:w,height:h,holes}=p.plateau;
   const d=normalizeDesign({version:1,model:p.id,name:p.name,objects:[{id:'cover',name:'Photo',type:'png',...asset,x:w/2,y:h/2,width:140,rotation:0}]},XML);
   const {data,info}=await sharp(await exportPNG(d)).ensureAlpha().raw().toBuffer({resolveWithObject:true});
@@ -39,8 +39,8 @@ test('every model exports its own physical size, transparent exterior and ALL cu
  }
 });
 test('Pro mockups and retained source metadata exist for all official color choices',async()=>{
- assert.equal(PHONES.length,5);assert.deepEqual(PHONES.map(p=>p.colors.length),[4,3,3,4,4]);
- for(const p of PHONES.slice(1)){
+ const iphones=PHONES.filter(p=>p.family!=='macbook');assert.equal(iphones.length,5);assert.deepEqual(iphones.map(p=>p.colors.length),[4,3,3,4,4]);
+ for(const p of iphones.slice(1)){
   const dimensions=JSON.parse(await readFile(`assets/phones/${p.id}/dimensions.json`));
   assert.equal(dimensions.official_holes_name_x_y_diameter_mm.length,6);
   assert.equal((await readFile(`assets/phones/sources/${p.id}.pdf`)).subarray(0,4).toString(),'%PDF');
@@ -59,7 +59,9 @@ test('local server image API and per-model exports/assets work together',async t
  const socket=net.createServer();await new Promise(r=>socket.listen(0,'127.0.0.1',r));const port=socket.address().port;await new Promise(r=>socket.close(r));
  const proc=spawn(process.execPath,['server.mjs','--port',String(port)],{cwd:process.cwd(),stdio:['ignore','pipe','pipe']});t.after(()=>proc.kill());
  await new Promise((resolve,reject)=>{proc.stdout.once('data',resolve);proc.once('error',reject);proc.once('exit',code=>reject(new Error('server exited '+code)));});
- const base=`http://127.0.0.1:${port}`,post=(path,body)=>fetch(base+path,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+ const base=`http://127.0.0.1:${port}`;
+ for(const asset of ['/ui.css','/src/i18n.js','/src/additional-shapes.js','/src/macbooks.js'])assert.equal((await fetch(base+asset)).status,200,asset);
+ const post=(path,body)=>fetch(base+path,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
  const imported=await post('/api/import-image',{dataUrl:await imageURL('jpeg')});assert.equal(imported.status,200);const a=await imported.json();
  for(const p of PHONES){
   for(const c of p.colors)assert.equal((await fetch(base+mockupPath(p.id,c.id))).status,200);

@@ -3,10 +3,13 @@ import {loadLayout,saveLayout} from './src/layout-store.js';
 import {MAX_PNG_BYTES,MAX_LAYOUT_BYTES} from './src/png-import.js';
 import {mockupArtwork,loadMockupBody} from './src/mockup.js?v=20261008-inline';
 import {PHONES,getPhone,getPlateau} from './src/phones.js';
+import {macbookLogoMarkup} from './src/macbooks.js';
+import {avoidLogo} from './src/layout-check.js';
+import {generationRequest} from './src/generation.js';
 import {SHAPES,COLORS,normalizeConfig,renderSVG} from './src/avatar.js?v=20261008-shapes';
-import {DEFAULT_DESIGN,normalizeDesign,assetSVG,objectMarkup,objectHeight,objectTransform,changeDesignModel,centerDesignObject,coverDesignObject} from './src/design.js';
+import {DEFAULT_DESIGN,OBJECT_LIMITS,initialObjectWidth,presetObjects,normalizeDesign,assetSVG,objectMarkup,objectHeight,objectTransform,changeDesignModel,centerDesignObject,coverDesignObject} from './src/design.js';
 const $=id=>document.getElementById(id),clone=value=>structuredClone(value);
-let design=clone(DEFAULT_DESIGN),selected='first',recipe=normalizeConfig({padding:0}),showBase=true,showCut=true,zoom=1,drag=null,timer;
+let design=clone(DEFAULT_DESIGN),selected='first',recipe=normalizeConfig({padding:0}),showBase=true,showCut=true,showLogo=true,zoom=1,drag=null,timer;
 let past=[],future=[],catalog=[];
 function trimHistory(list){let bytes=0;for(let i=list.length-1;i>=0;i--){bytes+=list[i].length;if(bytes>48*1024*1024||list.length-i>60){list.splice(0,i+1);break;}}}
 const snapshot=()=>JSON.stringify(design),current=()=>design.objects.find(o=>o.id===selected),uid=()=>crypto.randomUUID();
@@ -21,14 +24,16 @@ function undo(){if(!past.length)return;future.push(snapshot());trimHistory(futur
 function redo(){if(!future.length)return;past.push(snapshot());trimHistory(past);design=JSON.parse(future.pop());selected=design.objects.at(-1)?.id;persist();render();}
 function choose(next){recipe=normalizeConfig({...recipe,...next});const o=current();if(o?.type==='avatar')change(()=>{o.config=clone(recipe);o.name=avatarName(recipe);});else render();}
 function avatarName(c){return COLORS.find(o=>o.id===c.color).name+SHAPES.find(o=>o.id===c.shape).name;}
-function addAvatar(config=recipe){change(()=>{const c=normalizeConfig(config);const o={id:uid(),type:'avatar',name:avatarName(c),config:c,x:getPlateau(design).width/2,y:getPlateau(design).height/2,width:10,rotation:0};design.objects.push(o);selected=o.id;recipe=clone(c);});}
+function addAvatar(config=recipe){change(()=>{const c=normalizeConfig(config);const o={id:uid(),type:'avatar',name:avatarName(c),config:c,x:getPlateau(design).width/2,y:getPlateau(design).height/2,width:initialObjectWidth(design.model,10),rotation:0};design.objects.push(o);selected=o.id;avoidNew([o.id]);recipe=clone(c);});}
+function avoidNew(ids){if($('auto-avoid-logo').checked&&getPhone(design.model).logo)design=avoidLogo(design,{ids,...layoutCheckOptions()}).design;}
 function renderCanvas(){
   const {width:w,height:h,path}=getPlateau(design),vw=(w+12)/zoom,vh=(h+18)/zoom;
   $('canvas').setAttribute('viewBox',`${(w-vw)/2} ${(h-vh)/2} ${vw} ${vh}`);
   const art=design.objects.map(o=>`<g data-object="${o.id}" style="cursor:move">${objectMarkup({...o,id:'editor-'+o.id})}</g>`).join('');
+  const model=getPhone(design.model),logo=model.family==='macbook'&&showLogo?macbookLogoMarkup(model,{fill:'#657953',guide:true}):'';
   const o=current();let handle='';
-  if(o){const ht=objectHeight(o),x=-o.width/2,y=-ht/2;handle=`<g transform="${objectTransform(o)}" fill="none" stroke="#657953" stroke-width="0.15"><rect x="${x}" y="${y}" width="${o.width}" height="${ht}" pointer-events="none" stroke-dasharray=".6 .5"/><line x1="0" y1="${y}" x2="0" y2="${y-2.5}" pointer-events="none"/><circle data-handle="rotate" cx="0" cy="${y-2.5}" r=".65" fill="white" style="cursor:crosshair"/><rect data-handle="resize" x="${o.width/2-.6}" y="${ht/2-.6}" width="1.2" height="1.2" fill="white" style="cursor:nwse-resize"/></g>`;}
-  $('canvas').innerHTML=`<defs><clipPath id="board-clip"><path d="${path}" clip-rule="evenodd"/></clipPath></defs>${showBase?`<path d="${path}" fill="#d9dde2" fill-rule="evenodd"/>`:''}<g clip-path="url(#board-clip)">${art}</g>${showCut?`<path d="${path}" fill="none" stroke="#c595af" stroke-width=".10" pointer-events="none"/>`:''}${handle}`;
+  if(o){const ht=objectHeight(o),x=-o.width/2,y=-ht/2,hs=getPhone(design.model).family==='macbook'?5:1;handle=`<g transform="${objectTransform(o)}" fill="none" stroke="#657953" stroke-width="${.15*hs}"><rect x="${x}" y="${y}" width="${o.width}" height="${ht}" pointer-events="none" stroke-dasharray="${.6*hs} ${.5*hs}"/><line x1="0" y1="${y}" x2="0" y2="${y-2.5*hs}" pointer-events="none"/><circle data-handle="rotate" cx="0" cy="${y-2.5*hs}" r="${.65*hs}" fill="white" style="cursor:crosshair"/><rect data-handle="resize" x="${o.width/2-.6*hs}" y="${ht/2-.6*hs}" width="${1.2*hs}" height="${1.2*hs}" fill="white" style="cursor:nwse-resize"/></g>`;}
+  $('canvas').innerHTML=`<defs><clipPath id="board-clip"><path d="${path}" clip-rule="evenodd"/></clipPath></defs>${showBase?`<path d="${path}" fill="#d9dde2" fill-rule="evenodd"/>`:''}<g clip-path="url(#board-clip)">${art}${logo}</g>${showCut?`<path d="${path}" fill="none" stroke="#c595af" stroke-width=".10" pointer-events="none"/>`:''}${handle}`;
   localizeSVG($('canvas'));
   $('object-count').textContent=t('{count} 个形象',{count:design.objects.length});
 }
@@ -50,19 +55,23 @@ function render(){
   for(const id of ['duplicate','front','back','delete','center','fill-plateau'])$(id).disabled=!o;
   $('undo').disabled=!past.length;$('redo').disabled=!future.length;
   for(const id of ['show-base','show-cut'])$(id).setAttribute('aria-pressed',String(id==='show-base'?showBase:showCut));
+  $('show-logo').setAttribute('aria-pressed',String(showLogo));
+  $('avoid-logo').disabled=!getPhone(design.model).logo||!design.objects.length;
+  scheduleChecks();
 }
 for(const s of SHAPES){const b=document.createElement('button');b.dataset.id=s.id;b.setAttribute('aria-label',t(s.name));b.dataset.helpText=t(s.name);b.innerHTML=renderSVG({shape:s.id,size:80,padding:8},{eyes:false})+`<span>${s.name}</span>`;b.onclick=()=>choose({shape:s.id});$('shapes').append(b);}
 for(const c of COLORS){const b=document.createElement('button');b.dataset.id=c.id;b.style.setProperty('--swatch',c.hex);b.dataset.helpText=`${t(c.name)} ${c.hex}`;b.setAttribute('aria-label',t(c.name));b.onclick=()=>choose({color:c.id});$('colors').append(b);}
-for(let i=1;i<=4;i++){const b=document.createElement('button');b.dataset.preset=String(i);b.textContent=t('示例 {n}',{n:'0'+i});b.onclick=async()=>{try{const data=await (await fetch('/assets/iphone-air/placements.json')).json();const s=data.styles[i-1];change(()=>{design={version:1,model:design.model,name:`${getPhone(design.model).name} 排版 0${i}`,objects:s.characters.map((c,j)=>({id:uid(),name:avatarName(c),type:'avatar',config:normalizeConfig({shape:c.shape,color:c.color,padding:0,size:200}),x:c.center_mm[0]*getPlateau(design).width/PHONES[0].plateau.width,y:c.center_mm[1]*getPlateau(design).height/PHONES[0].plateau.height,width:c.canvas_size_mm,rotation:c.angle_degrees}))};selected=design.objects.at(-1).id;recipe=clone(current().config);});toast(t('已载入排版 {n}',{n:'0'+i}));}catch(e){toast(errorText(e));}};$('presets').append(b);}
+for(let i=1;i<=4;i++){const b=document.createElement('button');b.dataset.preset=String(i);b.textContent=t('示例 {n}',{n:'0'+i});b.onclick=async()=>{try{const data=await (await fetch('/assets/iphone-air/placements.json')).json();const s=data.styles[i-1];change(()=>{design={version:1,model:design.model,name:`${getPhone(design.model).name} 排版 0${i}`,objects:presetObjects(design.model,s.characters,uid)};avoidNew(design.objects.map(o=>o.id));selected=design.objects.at(-1).id;recipe=clone(current().config);});toast(t('已载入排版 {n}',{n:'0'+i}));}catch(e){toast(errorText(e));}};$('presets').append(b);}
 $('add-avatar').onclick=()=>addAvatar();$('undo').onclick=undo;$('redo').onclick=redo;
 for(const [id,key] of [['pos-x','x'],['pos-y','y'],['obj-width','width'],['rotation','rotation'],['object-name','name']])$(id).onchange=()=>{const o=current();if(!o)return;change(()=>{o[key]=key==='name'?$(id).value:$(id).value===''?NaN:Number($(id).value);});};
 $('design-name').onchange=()=>change(()=>{design.name=$('design-name').value;});
 $('center').onclick=()=>change(()=>centerDesignObject(design,current()));
-$('duplicate').onclick=()=>change(()=>{const o=clone(current());o.id=uid();o.name+=' 副本';o.x=Math.min(165,o.x+1.5);o.y=Math.min(124,o.y+1.5);design.objects.push(o);selected=o.id;});
+$('duplicate').onclick=()=>change(()=>{const o=clone(current());o.id=uid();o.name+=' 副本';o.x=Math.min(OBJECT_LIMITS.x,o.x+1.5);o.y=Math.min(OBJECT_LIMITS.y,o.y+1.5);design.objects.push(o);selected=o.id;avoidNew([o.id]);});
 $('delete').onclick=()=>change(()=>{design.objects=design.objects.filter(o=>o.id!==selected);selected=design.objects.at(-1)?.id;});
 for(const side of ['front','back'])$(side).onclick=()=>change(()=>{const o=current();design.objects=design.objects.filter(v=>v.id!==o.id);design.objects[side==='front'?'push':'unshift'](o);});
 $('clear').onclick=()=>change(()=>{design.objects=[];selected=null;});
 $('show-base').onclick=()=>{showBase=!showBase;render();};$('show-cut').onclick=()=>{showCut=!showCut;render();};$('zoom').onchange=()=>{zoom=Number($('zoom').value);renderCanvas();};
+$('show-logo').onclick=()=>{showLogo=!showLogo;render();};
 function point(e){return new DOMPoint(e.clientX,e.clientY).matrixTransform($('canvas').getScreenCTM().inverse());}
 $('canvas').addEventListener('pointerdown',e=>{
   if(e.button!==0)return;const handle=e.target.closest('[data-handle]')?.dataset.handle,id=e.target.closest('[data-object]')?.dataset.object;
@@ -71,9 +80,9 @@ $('canvas').addEventListener('pointerdown',e=>{
 });
 $('canvas').addEventListener('pointermove',e=>{
   if(!drag||e.pointerId!==drag.pointer)return;const p=point(e),o=current(),base=drag.object;if(!o)return;
-  if(drag.mode==='move'){o.x=Math.max(-100,Math.min(165,base.x+p.x-drag.start.x));o.y=Math.max(-100,Math.min(124,base.y+p.y-drag.start.y));}
+  if(drag.mode==='move'){o.x=Math.max(-100,Math.min(OBJECT_LIMITS.x,base.x+p.x-drag.start.x));o.y=Math.max(-100,Math.min(OBJECT_LIMITS.y,base.y+p.y-drag.start.y));}
   else if(drag.mode==='rotate')o.rotation=Math.atan2(p.y-o.y,p.x-o.x)*180/Math.PI+90;
-  else {const angle=-base.rotation*Math.PI/180,dx=p.x-base.x,dy=p.y-base.y,lx=dx*Math.cos(angle)-dy*Math.sin(angle),ly=dx*Math.sin(angle)+dy*Math.cos(angle);o.width=Math.max(.5,Math.min(150,2*Math.max(Math.abs(lx),Math.abs(ly)/(objectHeight(base)/base.width))));}
+  else {const angle=-base.rotation*Math.PI/180,dx=p.x-base.x,dy=p.y-base.y,lx=dx*Math.cos(angle)-dy*Math.sin(angle),ly=dx*Math.sin(angle)+dy*Math.cos(angle);o.width=Math.max(.5,Math.min(OBJECT_LIMITS.width,2*Math.max(Math.abs(lx),Math.abs(ly)/(objectHeight(base)/base.width))));}
   render();
 });
 function endDrag(e){if(!drag||e.pointerId!==drag.pointer)return;record(drag.before);drag=null;render();}
@@ -89,8 +98,8 @@ window.addEventListener('keydown',e=>{
 async function api(path,value){const response=await fetch(path,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(value)});if(!response.ok)throw new Error((await response.json()).error||'请求失败');return response;}
 function download(blob,name){const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),10000);}
 $('import-svg').onclick=()=>$('svg-file').click();
-$('svg-file').onchange=async()=>{const f=$('svg-file').files[0];if(!f)return;try{if(f.size>200000)throw new Error('SVG 必须小于 200 KB');const asset=await (await api('/api/import-svg',{svg:await f.text()})).json();change(()=>{const o={id:uid(),name:f.name.slice(0,100),type:'svg',...asset,x:getPlateau(design).width/2,y:getPlateau(design).height/2,width:12,rotation:0};design.objects.push(o);selected=o.id;});toast(t('已导入 SVG，保持矢量与宽高比例。'));}catch(e){toast(t('导入失败：{error}',{error:errorText(e)}));}finally{$('svg-file').value='';}};
-function addAsset(asset,name,type){change(()=>{const o={id:uid(),name:name.slice(0,100),type,...asset,x:getPlateau(design).width/2,y:getPlateau(design).height/2,width:12,rotation:0};design.objects.push(o);selected=o.id;});}
+$('svg-file').onchange=async()=>{const f=$('svg-file').files[0];if(!f)return;try{if(f.size>200000)throw new Error('SVG 必须小于 200 KB');const asset=await (await api('/api/import-svg',{svg:await f.text()})).json();change(()=>{const o={id:uid(),name:f.name.slice(0,100),type:'svg',...asset,x:getPlateau(design).width/2,y:getPlateau(design).height/2,width:initialObjectWidth(design.model),rotation:0};design.objects.push(o);selected=o.id;avoidNew([o.id]);});toast(t('已导入 SVG，保持矢量与宽高比例。'));}catch(e){toast(t('导入失败：{error}',{error:errorText(e)}));}finally{$('svg-file').value='';}};
+function addAsset(asset,name,type){change(()=>{const o={id:uid(),name:name.slice(0,100),type,...asset,x:getPlateau(design).width/2,y:getPlateau(design).height/2,width:initialObjectWidth(design.model),rotation:0};design.objects.push(o);selected=o.id;avoidNew([o.id]);});}
 function fileDataUrl(file){return new Promise((resolve,reject)=>{const r=new FileReader();r.onload=()=>resolve(r.result);r.onerror=()=>reject(new Error('读取图片失败'));r.readAsDataURL(file);});}
 $('import-png').onclick=()=>$('png-file').click();
 $('png-file').onchange=async()=>{const f=$('png-file').files[0];if(!f)return;try{if(f.size>MAX_PNG_BYTES)throw new Error('图片最大 5 MB');let dataUrl=await fileDataUrl(f);if(dataUrl.startsWith('data:application/octet-stream;')){const ext=f.name.split('.').at(-1).toLowerCase(),mime={jpg:'jpeg',jpeg:'jpeg',png:'png',webp:'webp',gif:'gif',tif:'tiff',tiff:'tiff'}[ext];if(mime)dataUrl=dataUrl.replace('application/octet-stream','image/'+mime);}const asset=await (await api('/api/import-image',{dataUrl})).json();addAsset(asset,f.name,'png');toast(t('已导入图片，保持比例与透明度；可点击“铺满平台”。'));}catch(e){toast(t('导入失败：{error}',{error:errorText(e)}));}finally{$('png-file').value='';}};
@@ -102,12 +111,18 @@ function renderLibrary(){
 $('library-group').onchange=renderLibrary;
 fetch('/assets/library/catalog.json').then(r=>{if(!r.ok)throw new Error('素材目录加载失败');return r.json();}).then(data=>{catalog=data;renderLibrary();}).catch(e=>{$('library-status').textContent=errorText(e);toast(errorText(e));});
 let renderedModel;
-for(const phone of PHONES){const option=document.createElement('option');option.value=phone.id;option.textContent=phone.name;$('phone-model').append(option);}
+for(const [family,label] of [['iphone','iPhone'],['macbook','MacBook']]){const group=document.createElement('optgroup');group.label=label;for(const model of PHONES.filter(p=>(p.family||'iphone')===family)){const option=document.createElement('option');option.value=model.id;option.textContent=model.name;group.append(option);}$('phone-model').append(group);}
 function renderModel(){
   const model=getPhone(design.model),{width,height}=model.plateau;
   $('phone-model').value=model.id;$('model-name').textContent=model.name;$('model-size').textContent=`${width.toFixed(4)} × ${height.toFixed(4)} mm · 1:1`;
   $('canvas').setAttribute('aria-label',t('{model} 贴纸，拖动形象调整位置',{model:model.name}));
-  $('geometry-note').textContent=t('灰底仅供预览。成品透明；外边界与 {count} 个孔位自动挖空。',{count:model.plateau.holes.length});
+  const laptop=model.family==='macbook';
+  $('show-logo').hidden=!laptop;
+  $('surface-caption').dataset.i18n=laptop?'上盖 · 合盖俯视':'背面 · 镜头在左';$('surface-caption').textContent=t($('surface-caption').dataset.i18n);
+  $('canvas').style.aspectRatio=laptop?`${width+12} / ${height+18}`:'';
+  $('phone-preview').classList.toggle('macbook-preview',laptop);
+  $('geometry-note').textContent=laptop?t('MacBook 上盖按官方宽深及官方图轮廓校准；Logo 占位仅供排版参考，不进入导出。图片推算尺寸，实裁前请核对纸样。'):t('灰底仅供预览。成品透明；外边界与 {count} 个孔位自动挖空。',{count:model.plateau.holes.length});
+  for(const [id,key] of [['pos-x','x'],['pos-y','y'],['obj-width','width']])$(id).max=OBJECT_LIMITS[key];
   $('phone-specs').href=model.specs;
   if(renderedModel!==model.id){
     $('phone-color').replaceChildren(...model.colors.map(c=>{const o=document.createElement('option');o.value=c.id;o.textContent=t(c.name);return o;}));
@@ -122,7 +137,7 @@ async function renderMockup(){
   const revision=++mockupRevision;
   const model=getPhone(design.model),color=model.colors.find(c=>c.id===$('phone-color').value)||model.colors[0],{width,height}=model.phone;
   $('phone-preview').setAttribute('viewBox',`-4 -4 ${width+8} ${height+8}`);
-  $('phone-preview').setAttribute('aria-label',t('{model} {color}整机背面贴纸预览',{model:model.name,color:t(color.name)}));
+  $('phone-preview').setAttribute('aria-label',t(model.family==='macbook'?'{model} {color}上盖贴纸预览':'{model} {color}整机背面贴纸预览',{model:model.name,color:t(color.name)}));
   try {
     const body=await loadMockupBody(model.id,color.id);
     if(revision!==mockupRevision)return;
@@ -130,6 +145,37 @@ async function renderMockup(){
   }catch(e){if(revision===mockupRevision)toast(errorText(e));}
 }
 $('phone-color').onchange=()=>{try{localStorage.setItem('template-plus-phone-color-'+getPhone(design.model).id,$('phone-color').value);}catch{}renderMockup();};
+let checkTimer,checkRevision=0;
+function layoutCheckOptions(){const clearance=Number($('check-clearance').value),minDpi=Number($('check-dpi').value);if($('check-clearance').value===''||$('check-dpi').value==='')throw new Error('间距和 DPI 不能为空');return {clearance,edgeClearance:clearance,holeClearance:clearance,minDpi};}
+async function renderChecks(){
+  clearTimeout(checkTimer);$('check-issues').replaceChildren();
+  const revision=++checkRevision;
+  try{
+    const report=await (await api('/api/check',{design,options:layoutCheckOptions()})).json();
+    if(revision!==checkRevision)return;
+    $('check-summary').textContent=t(report.clear?'检查通过':'{count} 项提醒',{count:report.issues.length});
+    for(const issue of report.issues.slice(0,80)){
+      const names=issue.ids.map(id=>displayName(design.objects.find(o=>o.id===id)?.name||id)).join(' / '),b=document.createElement('button');
+      const label={'overlap':'图案重叠','object-clearance':'图案间距不足','logo-clearance':'Logo 间距不足','edge-clearance':'外轮廓间距不足','hole-clearance':'孔位间距不足','low-dpi':'图片分辨率偏低'}[issue.code];
+      const detail=issue.code==='low-dpi'?`${Math.round(issue.dpi)} / ${issue.requiredDpi} DPI`:`${issue.actualMm} / ${issue.requiredMm} mm`;
+      b.type='button';b.dataset.issue=issue.code;b.textContent=`${t(label)} · ${names} · ${detail}`;b.onclick=()=>select(issue.ids[0]);$('check-issues').append(b);
+    }
+    if(report.issues.length>80){const note=document.createElement('p');note.textContent=t('更多提醒请用 CLI check 查看。');$('check-issues').append(note);}
+  }catch(e){if(revision===checkRevision)$('check-summary').textContent=errorText(e);}
+}
+function scheduleChecks(){++checkRevision;clearTimeout(checkTimer);checkTimer=setTimeout(renderChecks,160);}
+for(const id of ['check-clearance','check-dpi'])$(id).onchange=renderChecks;
+$('check-layout').onclick=renderChecks;
+$('avoid-logo').onclick=()=>{
+  try{const result=avoidLogo(design,layoutCheckOptions());change(()=>{design=result.design;});toast(t('已移动 {count} 个图案，{unresolved} 个未找到位置。',{count:result.moved.length,unresolved:result.unresolved.length}));}catch(e){toast(errorText(e));}
+};
+function currentGenerationRequest(){return generationRequest($('generation-prompt').value,{transparentBackground:$('generation-transparent').checked});}
+$('show-generation').onclick=()=>$('generation-dialog').showModal();
+$('close-generation').onclick=()=>$('generation-dialog').close();
+$('save-generation-request').onclick=()=>{try{const request=currentGenerationRequest();download(new Blob([JSON.stringify(request,null,2)+'\n'],{type:'application/json'}),'image-request.json');}catch(e){toast(errorText(e));}};
+$('copy-generation-request').onclick=async()=>{try{const request=currentGenerationRequest();await navigator.clipboard.writeText(t('请使用你的生图工具生成以下图案，保留透明背景（如要求），保存到本地并通过 Template Plus CLI 导入。若不支持生图请告知。')+'\n'+JSON.stringify(request,null,2));toast(t('生成请求已复制。'));}catch(e){toast(errorText(e));}};
+$('import-generated').onclick=()=>{try{currentGenerationRequest();$('generated-file').click();}catch(e){toast(errorText(e));}};
+$('generated-file').onchange=async()=>{const f=$('generated-file').files[0];if(!f)return;try{if(f.size>MAX_PNG_BYTES)throw new Error('图片最大 5 MB');const request=currentGenerationRequest(),asset=await (await api('/api/import-generated',{dataUrl:await fileDataUrl(f),request})).json();addAsset(asset,request.prompt,'png');$('generation-dialog').close();toast(t('已导入生成图片，提示词随布局保存。'));}catch(e){toast(errorText(e));}finally{$('generated-file').value='';}};
 $('toggle-mockup').onclick=()=>{const panel=$('mockup-panel');panel.hidden=!panel.hidden;$('toggle-mockup').setAttribute('aria-expanded',String(!panel.hidden));updateMockupToggle();};
 function updateMockupToggle(){const b=$('toggle-mockup'),key=$('mockup-panel').hidden?'展开机模':'收起机模';b.textContent=$('mockup-panel').hidden?'⌄':'⌃';b.setAttribute('aria-label',t(key));b.dataset.helpText=t(key);}
 $('save-layout').onclick=()=>{download(new Blob([JSON.stringify(design,null,2)+'\n'],{type:'application/json'}),getPhone(design.model).id+'-layout.json');toast(t('布局已保存，包含形象素材和位置。'));};
@@ -140,6 +186,8 @@ $('show-agent').onclick=()=>{
     'node sticker-cli.mjs inspect --config layout.json --json',
     o?`node sticker-cli.mjs update --config layout.json --id ${o.id} --x ${o.x} --y ${o.y} --width ${o.width} --rotation ${o.rotation} --out layout-v2.json --json`:'node sticker-cli.mjs add --config layout.json --id buddy --shape drop --color brown --out layout-v2.json --json',
     'node sticker-cli.mjs apply --config layout.json --ops operations.json --out layout-v2.json --json',
+    'node sticker-cli.mjs check --config layout-v2.json --clearance 2 --json',
+    'node sticker-cli.mjs avoid-logo --config layout-v2.json --out layout-v3.json --json',
     'node sticker-cli.mjs render --config layout-v2.json --out output/sticker.pdf --json',
     `node sticker-cli.mjs preview --config layout-v2.json --phone-color ${$('phone-color').value} --out output/preview.png --json`,
   ].join('\n\n');

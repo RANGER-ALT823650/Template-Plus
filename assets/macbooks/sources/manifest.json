@@ -1,0 +1,41 @@
+{
+  "macbook-air-13": {
+    "specs_url": "https://www.apple.com.cn/macbook-air/specs/",
+    "image_url": "https://www.apple.com.cn/v/macbook-air/specs/c/images/specs/13-inch/mba_13_size1__eyfditb7ixea_large_2x.jpg",
+    "local_file": "assets/macbooks/sources/macbook-air-13-official-top.jpg",
+    "sha256": "c3d9c07c71015838a1fd2a40eed21dcb23aa2af384e396254bf153b080f077c3",
+    "alt": "呈闭合状态的 13 英寸 MacBook Air 的外观图，Apple 标志位于中央。"
+  },
+  "macbook-air-15": {
+    "specs_url": "https://www.apple.com.cn/macbook-air/specs/",
+    "image_url": "https://www.apple.com.cn/v/macbook-air/specs/c/images/specs/15-inch/mba_15_size_top__f0yqeuf0a4y2_large_2x.jpg",
+    "local_file": "assets/macbooks/sources/macbook-air-15-official-top.jpg",
+    "sha256": "9c47ea3b6aeca438dc4ebef711fb115800e7b780032b36544f1c73fbead0df99",
+    "alt": "呈闭合状态的 15 英寸 MacBook Air 的外观图，Apple 标志位于中央。"
+  },
+  "macbook-pro-14": {
+    "specs_url": "https://www.apple.com.cn/macbook-pro/specs/",
+    "image_url": "https://www.apple.com.cn/v/macbook-pro/specs/d/images/specs/14-inch/dimensions_1_14_inch__da8sc3fnv0cy_large_2x.jpg",
+    "local_file": "assets/macbooks/sources/macbook-pro-14-official-top.jpg",
+    "sha256": "f616b65191e3c598e6a8da966ef30770673baef9d60d60b63995b8ba9dadeaf2",
+    "alt": "呈闭合状态的 14 英寸 MacBook Pro 的外观图，展示位于机身中央的 Apple 标志。"
+  },
+  "macbook-pro-16": {
+    "specs_url": "https://www.apple.com.cn/macbook-pro/specs/",
+    "image_url": "https://www.apple.com.cn/v/macbook-pro/specs/d/images/specs/16-inch/dimensions_1_16_inch__gknf878bnyqa_large_2x.jpg",
+    "local_file": "assets/macbooks/sources/macbook-pro-16-official-top.jpg",
+    "sha256": "439e7c867e5b78fa0ae197b2bb4a4c0bd2278d6e1aa409d41b860930bab334c4",
+    "alt": "呈闭合状态的 16 英寸 MacBook Pro 的外观图，展示位于机身中央的 Apple 标志。"
+  },
+  "macbook-neo": {
+    "specs_url": "https://www.apple.com.cn/macbook-neo/specs/",
+    "image_url": "https://www.apple.com.cn/v/macbook-neo/c/images/specs/size1__c0km112x54cy_large_2x.jpg",
+    "local_file": "assets/macbooks/sources/macbook-neo-official-top.jpg",
+    "sha256": "58371c52f91706f6a080e38bf545de51b62a889ca27d36984883b3cb60019de9",
+    "alt": "机身呈闭合状态的 13 英寸 MacBook Neo 的外观，Apple 标志位于上盖中央。"
+  },
+  "neo_drawing": {
+    "url": "https://developer.apple.com/download/files/accessories/dimensional-drawings/macbook-neo.pdf",
+    "sha256": "defa221e797c875b9d495bcc7bf339fc797649252da34f6004e63c3d9696e12e"
+  }
+}

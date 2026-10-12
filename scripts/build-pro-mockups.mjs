@@ -2,7 +2,7 @@ import {mkdir,writeFile,readFile} from 'node:fs/promises';
 import {PHONES} from '../src/phones.js';
 const original=await readFile(new URL('../assets/iphone-air/mockups/skyblue-rear.svg',import.meta.url),'utf8');
 const logo=original.match(/<path d="([^"]+)" transform="translate\(30.35 59\)"/)[1];
-for(const model of PHONES.filter(p=>p.id!=='iphone-air')){
+for(const model of PHONES.filter(p=>p.id!=='iphone-air'&&p.family!=='macbook')){
  const {width:w,height:h,plateauX:x,plateauY:y}=model.phone,{outer,holes}=model.plateau;
  const folder=new URL(`../assets/phones/${model.id}/mockups/`,import.meta.url);await mkdir(folder,{recursive:true});
  for(const c of model.colors){

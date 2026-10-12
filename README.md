@@ -1,6 +1,6 @@
 # Template Plus · 贴纸工作站
 
-独立于相邻 `Template/` 的本地工作站。原有形象编辑器、14 种轮廓、11 种参考颜色、固定白色眼睛、154 种组合、SVG / PNG / WebP、配置导入导出和原 CLI 全部保留。新的首页用于在 iPhone Air、17 / 18 Pro 与 Pro Max 平台底图上排版多个形象，再导出实际尺寸印切 PDF。
+独立于相邻 `Template/` 的本地工作站。原有形象编辑器、14 种轮廓、11 种参考颜色、固定白色眼睛、154 种组合、SVG / PNG / WebP、配置导入导出和原 CLI 全部保留。新的首页用于在 iPhone Air、17 / 18 Pro 与 Pro Max 平台底图，以及 MacBook Air / Pro / Neo 上盖上排版多个形象，再导出实际尺寸印切 PDF。
 
 ## 打开工作站
 
@@ -11,17 +11,17 @@ npm ci
 npm start
 ```
 
-打开 <http://127.0.0.1:4174>；完整形象编辑器为 <http://127.0.0.1:4174/avatar.html>。也可以从上一级运行 `npm --prefix Template-Plus start`。端口被占用时用 `npm start -- --port 4175`。
+打开 <http://127.0.0.1:4174>。顶部仅保留“贴纸”，形状与颜色直接在贴纸页操作；独立形象编辑器保留兼容地址 <http://127.0.0.1:4174/avatar.html>。也可以从上一级运行 `npm --prefix Template-Plus start`。端口被占用时用 `npm start -- --port 4175`。
 
 原版 `Template` 仍使用端口 4173。两个项目的源码、依赖、导出和浏览器保存互相独立。工作站仅监听 `127.0.0.1`，无需账户、云服务或外部字体。
 
 ## 设计贴纸
 
-1. 先在顶部选择 iPhone 机型，再选择形象和颜色，点击“添加形象”。选中已有模板形象时，形状与颜色直接修改选中的形象。
-2. 素材库内置 **Muse PNG 8 款、Muse SVG 9 款、Dots SVG 5 款、AI Logo SVG 8 款**，共 30 个独立素材；选择系列后点击缩略图即可添加。Muse 默认使用透明 PNG。也可以通过“导入 SVG 形象”或“导入图片 JPG / PNG”载入自己的 SVG 或 PNG、JPG / JPEG、WebP、静态 GIF、单页 TIFF 素材；或在完整形象编辑器点击“将当前形象添加到贴纸排版”。完整编辑器的留白与透明 / 白色画布设置会随形象一起带入。
+1. 先在顶部选择 iPhone 或 MacBook 机型，再选择形象和颜色，点击“添加形象”。选中已有模板形象时，形状与颜色直接修改选中的形象。
+2. 素材库内置 **Muse PNG 8 款、Muse SVG 9 款、Dots SVG 5 款、AI 标志 12 款（SVG 8 款、透明 PNG 4 款）**，共 34 个独立素材；选择系列后点击缩略图即可添加。Muse 默认使用透明 PNG。也可以通过“导入 SVG 形象”或“导入图片 JPG / PNG”载入自己的 SVG 或 PNG、JPG / JPEG、WebP、静态 GIF、单页 TIFF 素材；或在完整形象编辑器点击“将当前形象添加到贴纸排版”。完整编辑器的留白与透明 / 白色画布设置会随形象一起带入。
 3. 在画布拖动形象移动位置，右下角方形控制点等比缩放，顶部圆点旋转。右侧可输入毫米坐标、画布宽度和角度。形象中心的坐标以平台底图左上角为原点，背面正视、镜头在左，无镜像。
 4. 图层列表从上到下对应前到后，可复制、删除、置顶、置底。可撤销 / 重做，清空和替换示例均可撤销。点击画布形象后，方向键移动 0.1 mm，Shift + 方向键移动 1 mm，Ctrl / ⌘ Z 撤销，Ctrl / ⌘ Shift Z 重做。
-5. 四款示例继承 iPhone-Air 已有排版数据。示例会按当前平台宽高映射中心位置，形象保持毫米尺寸。灰底、刀线、画布缩放只影响编辑预览。
+5. 四款示例继承 iPhone-Air 已有排版数据。示例会按当前平台宽高映射中心位置；iPhone 保持原毫米尺寸，MacBook 按盖面比例等比放大图案。灰底、刀线、画布缩放只影响编辑预览。
 6. “保存布局”导出 JSON，包含所有形象素材和位置，同时保存所选机型（`model`）；没有 `model` 的旧布局继续按 Air 打开。切换机型会按平台比例映射图案中心，保持毫米宽度，支持撤销。之后可以重新导入。浏览器会自动保存；更换浏览器、端口、清理站点数据前请下载布局。浏览器通过 IndexedDB 保存较大的 PNG 布局，兼容原有小布局的 localStorage 保存。撤销历史最多 60 步、48 MB，较大图片布局可能保留更少步骤。
 7. 画布下方的“整机背面预览”实时套用当前透明贴纸。Air 保留天蓝色、深空黑色、云白色、浅金色；17 Pro / Pro Max 提供银色、星宇橙色、深蓝色；18 Pro / Pro Max 提供黑色、银色、冰川蓝色、勃艮第酒红色。颜色选择按机型记忆于当前浏览器。机模按各自官方工程图尺寸及平台孔位绘制，外观和 RGB 色泽为近似示意；机模不会进入印刷导出。
 
@@ -38,7 +38,7 @@ npm start
 - **CutContour - CUT ONLY - DO NOT PRINT**：独立图层，`CutContour` 洋红专色，0.1 mm 线宽，外轮廓及全部孔位（Air 三孔，Pro 六孔含三镜头、闪光灯、麦克风和 LiDAR）。PDF 图层打印状态为 OFF，屏幕显示为 ON。
 - 使用 **100% 实际尺寸** 输出，勿适应页面。图层可在支持 OCG 的软件中独立开关；导入或扁平化软件可能忽略打印状态，供应商应按 CutContour 专色分离刀线。
 
-刀线沿用现有标称几何，尚未加入机器公差、孔径补偿或出血。先按实尺寸出纸样核对位置；透明 PET 的白墨版和白色眼睛处理由供应商按工艺决定。排版允许形象重叠，边界 / 孔位会自动裁剪；工作站没有自动检查工艺安全间距。
+刀线沿用现有标称几何，尚未加入机器公差、孔径补偿或出血。先按实尺寸出纸样核对位置；透明 PET 的白墨版和白色眼睛处理由供应商按工艺决定。排版允许形象重叠，边界 / 孔位会自动裁剪；右侧排版检查会提示重叠、间距不足和图片 DPI，不会阻止有意重叠的导出。
 
 ### SVG / PNG
 
@@ -61,7 +61,48 @@ SVG 是透明印刷图案，毫米尺寸，无刀线，PNG 素材作为内嵌图
 
 原始 PDF 保存在 `assets/phones/sources/`，每款底图、来源 URL、SHA-256、孔位、标称机身尺寸和推导方法在 `assets/phones/<机型>/dimensions.json`；生成脚本为 `scripts/build-pro-plateaus.py`（需要 pdfplumber）和 `scripts/build-pro-mockups.mjs`。17 配色参考 [Apple 官方规格](https://support.apple.com/zh-cn/125090)，18 配色参考 [Apple 官方规格](https://www.apple.com.cn/iphone-18-pro/specs/)。云端版本位于 `cloud/`，同样提供五款机型与全部形象轮廓。
 
+## MacBook 上盖机模（本地）
+
+顶部机型菜单的 MacBook 分组新增 5 款，共 16 个配色机模：
+
+|机型|上盖标称宽 × 深 / mm|颜色|
+|---|---:|---|
+|MacBook Air 13″|304.1 × 215.0|天蓝色、银色、星光色、午夜色|
+|MacBook Air 15″|340.4 × 237.6|天蓝色、银色、星光色、午夜色|
+|MacBook Pro 14″|312.6 × 221.2|深空黑色、银色|
+|MacBook Pro 16″|355.7 × 248.1|深空黑色、银色|
+|MacBook Neo 13″|297.5 × 206.4|银色、桃粉色、柑橘黄色、靛蓝色|
+
+尺寸、颜色名称来自 2026-10-10 核对的 [Air 官方规格](https://www.apple.com.cn/macbook-air/specs/)、[Pro 官方规格](https://www.apple.com.cn/macbook-pro/specs/) 和 [Neo 官方规格](https://www.apple.com.cn/macbook-neo/specs/)。画布为合盖上盖俯视，坐标原点在左上角，无摄像头开孔，Apple 标志仅出现在机模预览中；图案可覆盖标志。机身宽深用于上盖标称范围。Logo 包含果身和叶片，尺寸与位置按各款官方俯视图校准，Neo 优先使用官方工程图矢量；完整 Logo 外框中心比盖子中心上移约 3.7–4.0 mm。Air / Pro 轮廓按官方图片拟合，Neo 轮廓按工程图矢量提取。图片推算值存在约 0.5–1 mm 误差，不是官方标注的 Logo / 圆角尺寸；RGB 色泽和边缘光泽仍为示意，实裁前请核对纸样。
+
+MacBook 新增形象、素材库和单个 SVG / 图片导入会按盖面比例设置初始尺寸：普通素材约 55–66 mm 宽，新增模板形象约 46–55 mm 宽；四款示例使用同一比例放大各个图案。完整布局导入恢复原毫米尺寸，已有布局不会自动放大。
+
+沿用保存 / 导入、撤销 / 重做、素材排版、整机预览及 PDF / SVG / 600 DPI PNG 导出。切换机型映射图案中心并保留毫米宽度；MacBook PDF 页面为上盖宽深各加 4 mm，仅一条外轮廓刀线。坐标范围扩展到 X / Y -100–500 mm、宽度 0.5–1000 mm，使居中、复制和铺满支持完整上盖。
+
+画布默认显示虚线 Apple **Logo 占位**，点击工具栏“Logo 占位”可隐藏。它叠加在图案上方，不能被选中或拖动，不作为布局对象保存，也不进入 PDF / SVG / PNG 印刷导出；整机预览仍保留机身原有 Logo，图案可覆盖它。
+
+|机型|Logo 外框宽 × 高 / mm（含叶片，推算值）|圆角对角附近等效 R / mm（非恒定圆弧）|
+|---|---:|---:|
+|Air 13″|约 36.9 × 45.4|约 10.8|
+|Air 15″|约 37.7 × 46.8|约 10.9|
+|Pro 14″|约 37.6 × 46.1|约 9.2|
+|Pro 16″|约 37.5 × 46.1|约 9.5|
+|Neo 13″|约 36.3 × 44.6|约 13.1|
+
+同系列两种尺寸的圆角接近，不能从图片差异确认它们有不同的精确半径；Air、Pro、Neo 三个系列的轮廓则有区别。工作站不再统一使用 7 mm 二次曲线圆角，而是使用各款校准轮廓。
+
+共享机型与 Logo 渲染定义位于 `src/macbooks.js`，派生几何位于 `src/macbook-geometry.js`。原始官方图片、[Neo 官方工程图](https://developer.apple.com/download/files/accessories/dimensional-drawings/macbook-neo.pdf)、来源 URL、SHA-256、图片像素框、拟合方法和结果保存在 `assets/macbooks/sources/`。`scripts/calibrate-macbook-geometry.py` 从保留的原始来源重建几何，需要 Pillow / numpy / scipy / opencv-python；可通过 `--pdf-python <含 pdfplumber 的 Python>` 单独指定 PDF 解释器。运行 `node scripts/build-macbook-mockups.mjs` 可按校准结果重建全部本地机模。此次变更仅在本地，没有更新 `cloud/` 或发布 ChatGPT Sites。
+
 ## 命令行
+
+### AI 图案、Logo 避让与排版检查（本地）
+
+- 左侧“＋ AI 图案”可填写提示词、指定透明背景，下载生成请求或复制给 Agent，再导入生成图片；提示词会随布局保存。生图能力来自 Agent 自身的图片生成工具或配置的 CLI 生成器，网页没有内置模型服务，没有能力时明确报告待处理请求。透明背景请求会验证真实 alpha，拒绝不透明底图。
+- “新增时避让 Logo”默认开启，添加形象、素材、生成图片及载入示例时尝试避让 MacBook Logo。右侧“避让 Logo”可处理现有布局，保留素材、毫米大小、角度和层次，支持撤销；找不到空位时保留对象并提示。完整布局导入和手动拖动保持用户指定位置。
+- 右侧自动检查图案重叠、图案 / Logo 间距、真实外轮廓与孔位间距，以及图片实际 DPI。默认间距 2 mm、最低 300 DPI，均可调整；提醒可点击选中对应对象，不强制改变构图或阻止导出。
+- 图案重叠和图案之间的间距按实际渲染的 **alpha 可见区域**检查，忽略透明留白、内部镂空；支持内置形象、SVG、PNG 和旋转 / 缩放，白色背景会计入。网页与 CLI 使用同一服务端渲染及检查实现。alpha 至少 16/255 才计入，通常以约 0.083 mm 网格采样，超大素材受最长边 2048 px / 总计 100 万像素限制，报告附采样精度。Logo 避让、图案与 Logo / 外轮廓 / 孔位的间距仍按旋转后的素材画布矩形保守检查，Logo 按含叶片的外框处理。这没有为每个图案生成独立刀线或自动出血补偿。外轮廓采用保留的标称路径，仍需按实际材料、设备公差和供应商要求核对。
+
+Agent 可自由先构图，再运行 `check` / `avoid-logo`、查看预览并交还布局；不必使用固定示例。文生图协议和生成器接入见 [CLI 使用说明](STICKER-CLI.md)。
 
 原形象 CLI 保持原命令与契约，详细说明见 [形象编辑器使用说明](AVATAR-README.md)：
 
@@ -99,7 +140,7 @@ node sticker-cli.mjs render --config iphone-air-layout.json --out output/my-stic
 - `src/design.js` / `src/phones.js` / `src/pro-geometry.js` / `src/svg-import.js` / `src/png-import.js` / `src/image-import.mjs`：共享排版与安全素材导入契约。
 - `src/layout-store.js`：IndexedDB 自动保存及旧布局兼容。
 - `src/mockup.js` / `assets/iphone-air/mockups/`：Air 四种机身配色及背面示意机模；Pro 素材和原始工程图位于 `assets/phones/`。
-- `assets/library/`：30 个独立素材副本和素材库目录。
+- `assets/library/`：34 个独立素材副本和素材库目录。
 - `src/export-pdf.mjs` / `src/export-png.mjs`：实际尺寸成品导出。
 - `assets/iphone-air/`：原底图、尺寸和四款排版数据的独立副本；来源与几何说明见 [底图来源](assets/iphone-air/README.md)。原始官方 PDF 继续留在相邻 iPhone-Air 项目。
 - `examples/`、`references/`、`scripts/`：保留原形象示例、只读参考和维护脚本。
@@ -109,7 +150,7 @@ node sticker-cli.mjs render --config iphone-air-layout.json --out output/my-stic
 npm test
 ```
 
-测试覆盖154 种形象 / 参考轮廓 / 原 CLI，以及布局与 SVG 导入验证、孔位透明裁剪、PDF 毫米尺寸 / 双图层 / CutContour 专色 / 刀线打印关闭、PNG 像素与 DPI、新 CLI 的实际文件输出、Agent 创作 / 编辑 / 批处理 / stdin 管道 / 失败不落盘 / 整机预览，四款 Pro 的六孔裁剪和页面尺寸、各机型配色、JPG / WebP / GIF / TIFF 导入与 EXIF 方向、本地 API 的导入及多机型导出，以及全部 30 个素材的导入 / JSON 恢复 / PNG 和 PDF 输出、PNG 透明度、内部引用安全和机模毫米坐标。浏览器交互与下载检查位于 `output/playwright/`。
+测试覆盖154 种形象 / 参考轮廓 / 原 CLI，以及布局与 SVG 导入验证、孔位透明裁剪、PDF 毫米尺寸 / 双图层 / CutContour 专色 / 刀线打印关闭、PNG 像素与 DPI、新 CLI 的实际文件输出、Agent 创作 / 编辑 / 批处理 / stdin 管道 / 失败不落盘 / 整机预览，四款 Pro 的六孔裁剪和页面尺寸、各机型配色、JPG / WebP / GIF / TIFF 导入与 EXIF 方向、本地 API 的导入及多机型导出，以及全部 34 个素材的导入 / JSON 恢复 / PNG 和 PDF 输出、PNG 透明度、内部引用安全和机模毫米坐标。浏览器交互与下载检查位于 `output/playwright/`。
 
 PDF 矢量转换使用 [PDFKit](https://pdfkit.org/docs/vector.html) 和 [SVG-to-PDFKit](https://github.com/alafr/SVG-to-PDFKit)。
 
